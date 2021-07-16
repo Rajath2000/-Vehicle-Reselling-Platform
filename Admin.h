@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<string>
+#include<bits/stdc++.h>
 using namespace std;
 
 string toUpperCase(string str)
