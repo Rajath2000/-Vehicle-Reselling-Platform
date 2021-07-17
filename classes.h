@@ -1,40 +1,61 @@
 #include<stdio.h>
 #include<string>
 #include<bits/stdc++.h>
+
 using namespace std;
 
+
+//========================All Global variables=========================//
+string const FUEL_TYPE[]={"PETROL","DIESEL"};
+string  const INSURENCE_TYPE[]={"THIRDPARTY","COMPREHENSIVE"};
+int     const WHEELER_TYPE[]={2,3,4};
+string  const WHEELER_TYPE2[]={"MOTERCYCLES"};
+string  const WHEELER_TYPE3[]={"RICKSHAWS"};
+string  const WHEELER_TYPE4[]={"CAR"};
+string  const TRANSMISSION_TYPE[]={"MANUAL","AUTOMATIC"};
+string  const MONTHS[]={"","JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"};
+//========================All Global variables=========================//
+
+//============================global User defind functions============================//
 string toUpperCase(string str)
 {
   transform(str.begin(), str.end(),str.begin(),::toupper);
   return str;
 }
+//============================global User defind functions============================//
 
 //==================Contains The Strucre of the Record & memeber functions ============================//
 
-struct monYear{
-    string month;
-    int year;
+class monYear{
+    int month; //1 to 12
+    int year; //1800 to today
 };
 
 class VechileRecorder {
    public:
-            string vechileNumber;
-            string carModelName;
-            int modelYear;
-            int kmsDriven;
-            string fuelType;
-            string transmission;
-            int enginePower;
-            monYear registerYear;
-            string insurenceType;
-            int milage;
-            int seatingCapacity;
-            string vehicleType;
+   //Attributes
+            string vechileNumber; // ^[A-Z]{2,2}[A-Z]+[0-9]+  
+            string carModelName;  //MARUTHI800
+            int modelYear; // 1800-today(2021)
+            float kmsDriven; //kilometres
+            short int fuelType;  //  0 for PETROL 1 for DIESEL
+            int transmission;  // 0 for MANUAL 1 for AUTOMATIC
+            int enginePower; //50CC to 1500CC (CC)
+            monYear registerYear; //
+            short int insurenceType;  // 0 for THIRDPARTY 1 for COMPREHENCIVE
+            float milage; // km/liters
+            int seatingCapacity; // 2,4,6,8
+            int wheelerType; // 0 for 2 wheeler , 1 for 3 wheeler,2 for 4 wheeler
+    //constructors
+            VechileRecorder(){};
+    //Member Functions
+            void addVechileRecord();
+            void removeVechileRecord();
+            void modifyVechileRecord();
+            void viewVechileList();
+            void viewOrderList();
 
 
-
-
-       
 };
 
 //Admin Class
@@ -96,6 +117,7 @@ void loginAdmin() {
 //===================================Run The Admin Main Function================================
 void runAdmin(Admin admin)
 {
+    VechileRecorder vechileRecorder;
     //Creating the Main Admin Object Who has all permission to Access
     Admin mainAdmin(admin.username,admin.password);
     string choice;
@@ -129,15 +151,15 @@ void runAdmin(Admin admin)
         getline(cin,choice);
         switch(stoi(choice))
         {
-           case 1:
+           case 1:vechileRecorder.addVechileRecord();
            break;
-           case 2:
+           case 2:vechileRecorder.removeVechileRecord();
            break;
-           case 3:
+           case 3:vechileRecorder.modifyVechileRecord();
            break;
-           case 4:
+           case 4:vechileRecorder.viewVechileList();
            break;
-           case 5:
+           case 5:vechileRecorder.viewOrderList();
            break;
            case 6:return;
            break;
@@ -152,3 +174,17 @@ void runAdmin(Admin admin)
 
 }
 //===================================End of Run The Admin Main Function================================
+
+
+
+//===========================Vechile Member Functions definitions============================================//
+void VechileRecorder::addVechileRecord(){};
+
+void VechileRecorder::removeVechileRecord(){};
+
+void VechileRecorder::modifyVechileRecord(){};
+
+void VechileRecorder::viewVechileList(){};
+
+void VechileRecorder::viewOrderList(){};
+//===========================End of Vechile Member Functions definitions=====================================//
