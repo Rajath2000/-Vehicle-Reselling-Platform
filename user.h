@@ -4,29 +4,19 @@
 #include<conio.h>
 using namespace std;
 
+//========================All Global variables=========================//
+unordered_map<string, User> userDetails;
+//========================All Global variables=========================//
 
 
 
 
-//Ueser Class
- class User{
-    public:
-    string username;
-    string password;
-    string phoneNumber;
-    User(){}
-    User(string userName, string Password,string phonenumber="")
-    {
-        username = userName;
-        password = Password;
-        phoneNumber = phonenumber;
-        
-
-    }
-
- };
-
+//============================global User defind functions=============(This is becase these function will be called before their definition)===============//
 void runUser(User);
+bool writeToUserFile(string,string,string,string);
+void readFromUserFile(string,int);
+//============================End of global User defind functions============================//
+
 
 
 //============================User SignUp ==========================//
@@ -41,7 +31,7 @@ void signUpUser()
 
 
     string username,password,phoneNumber;
-    int signupSucessfull=1;//set this to 1 if sign up is loginSucessfull
+    int signupSucessfull=0;//set this to 1 if sign up is loginSucessfull
 
     position(28,9);
     _cputs("Enter Username:");
@@ -53,17 +43,28 @@ void signUpUser()
     _cputs("Enter phoneNumber:");
     getline(cin,phoneNumber);
     
-    User user(toUpperCase(username),password,phoneNumber);
-   //============Perform signup with files=================s
-    if(signupSucessfull)
+    User user((toUpperCase(username)),password,phoneNumber);
+    if(username.length()>0 && password.length()>0 && phoneNumber.length()>0 && phoneNumber.length()==10)
     {
-        message="Sucessfully Created Account";
-        runUser(user);
+        //========================Write to the user.txt file if the user is new ============================//
+        if(writeToUserFile("user.txt",(toUpperCase(username)),password,phoneNumber))
+                    signupSucessfull=1;
+        //==================================================================================================//
+        if(signupSucessfull)
+        {
+            message="Sucessfully Created Account";
+            //Automatic Login
+            runUser(user);
+        }
+        else
+        {
+            message="User Already Exsists";
+            return;
+        }
     }
     else
     {
-        message="User Already Exsists";
-        return;
+        message="All Faileds are required";
     }
 
 }
@@ -81,11 +82,11 @@ void loginUser()
 
 
     string username,password,phoneNumber;
-    int loginSucessfull=1;//set this to 1 if login is loginSucessfull
+    int loginSucessfull=0;//set this to 1 if login is loginSucessfull
     string newUser="N";
 
     position(20,7);
-    _cputs("N e w  U S E R ? (Y or N) : ");
+    _cputs("New  USER ? (Y or N) : ");
     getline(cin, newUser);
 
 
@@ -99,7 +100,20 @@ void loginUser()
         getline(cin,password);
 
         User user(toUpperCase(username),password,phoneNumber);
-        //============Perform validation with files=================s
+         //============Perform validation with files=================//
+        //Read all user from file
+        readFromUserFile("user.txt",0);
+        
+        //check user exists 
+        if(userDetails.find(user.username)==userDetails.end())
+               loginSucessfull=0;
+        else
+        {
+            //if  exists compare the password
+            if(userDetails.at(user.username).password == password)
+                loginSucessfull=1;
+        }
+       //============================================================//
         if(loginSucessfull)
         {
             message="Login sucessfull";

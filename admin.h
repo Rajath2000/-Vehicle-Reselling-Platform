@@ -16,64 +16,10 @@ string  const TRANSMISSION_TYPE[]={"MANUAL","AUTOMATIC"};
 string  const MONTHS[]={"","JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"};
 //========================All Global variables=========================//
 
-//============================global User defind functions============================//
+//============================global User defind functions=============(This is becase these function will be called before their definition)===============//
 
-//============================global User defind functions============================//
+//============================End of global User defind functions============================//
 
-//==================Contains The Strucre of the Record & memeber functions ============================//
-
-class monYear{
-    int month; //1 to 12
-    int year; //1800 to today
-};
-
-class VechileRecorder {
-   public:
-   //Attributes
-            string vechileNumber; // ^[A-Z]{2,2}[A-Z]+[0-9]+  
-            string carModelName;  //MARUTHI800
-            int modelYear; // 1800-today(2021)
-            float kmsDriven; //kilometres
-            short int fuelType;  //  0 for PETROL 1 for DIESEL
-            int transmission;  // 0 for MANUAL 1 for AUTOMATIC
-            int enginePower; //50CC to 1500CC (CC)
-            monYear registerYear; //
-            short int insurenceType;  // 0 for THIRDPARTY 1 for COMPREHENCIVE
-            float milage; // km/liters
-            int seatingCapacity; // 2,4,6,8
-            int wheelerType; // 0 for 2 wheeler , 1 for 3 wheeler,2 for 4 wheeler
-    //constructors
-            VechileRecorder(){};
-    //Member Functions
-            void addVechileRecord();
-            void removeVechileRecord();
-            void modifyVechileRecord();
-            void viewVechileList();
-            void viewOrderList();
-
-            void orderVechile();
-            void searchVechile();
-            void viewCart();
-
-
-};
-
-//Admin Class
- class Admin{
-    public:
-    string username;
-    string password;
-    Admin(){}
-    Admin(string userName, string Password)
-    {
-        username = userName;
-        password = Password;
-
-    }
-    //Public Member Functions of Admin
-
-
-};
 
 
 void runAdmin(Admin);
@@ -87,7 +33,7 @@ void loginAdmin() {
 
 
     string username,password;
-    int loginSucessfull=1;//set this to 1 if login is loginSucessfull
+    int loginSucessfull=0;//set this to 1 if login is loginSucessfull
 
 
     position(28,8);
@@ -97,25 +43,40 @@ void loginAdmin() {
     _cputs("Enter password:");
     getline(cin,password);
 
-
-    Admin admin(toUpperCase(username),password);
-    //============Perform validation with files=================s
-    if(loginSucessfull)
+    if(username.length()>0 && password.length()>0)
     {
-         message="Login Sucessfull";
-         runAdmin(admin);
-        
+        Admin admin((toUpperCase(username)),password);
+        //============Perform validation with files=================//
+        readFromAdminFile("admin.txt");
+        //Check for User Exsistence
+        if(adminDetails.find(admin.username)==adminDetails.end())
+                 loginSucessfull=0;
+        else
+        {
+            //if user exists,the compare password
+            if(adminDetails.at(admin.username)==password)
+                loginSucessfull=1;
+        }        
+        //===========================================================//
+        if(loginSucessfull)
+        {
+            message="Login Sucessfull";
+            runAdmin(admin);
+            
+        }
+        else
+        {
+            //Return to Vehicle Reselling platform.c login Failed
+            message="Login Failed";
+            return;
+        } 
     }
     else
     {
-        //Return to Vehicle Reselling platform.c login Failed
-        message="Login Failed";
-        return;
-    } 
+        message="Username or Password required";
+    }
 }
 //============================Admin Login====================
-
-
 
 //===================================Run The Admin Main Function================================
 void runAdmin(Admin admin)
@@ -152,8 +113,8 @@ void runAdmin(Admin admin)
         position(11,17);
         cout<<"Enter Your Choice:\t";
         getline(cin,choice);
-        switch(stoi(choice))
-        {
+        switch(stoi(choice)) 
+        { 
            case 1:vechileRecorder.addVechileRecord();
            break;
            case 2:vechileRecorder.removeVechileRecord();

@@ -7,7 +7,7 @@ using namespace std;
 
 string message;
 
-//function to print output in required position
+//===================function to print output in required position================//
 void position(int x,int y)
 {
   COORD C;
