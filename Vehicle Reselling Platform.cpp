@@ -6,11 +6,14 @@
 #include<string>
 // #include<bits/stdc++.h>
 
+
 //==================User defind Header Files======================//
 #include "Helper.h"
 #include "admin.h"
+#include "user.h"
 //==================User defind Header Files======================//
 using namespace std;
+
 int main()
 {
    
@@ -19,6 +22,7 @@ int main()
     while(1)
     {
         system("cls");
+        dispayMessage();
         position(8,5);
         _cputs("++++++++++++++++++++ Vehicle Reselling Platform ++++++++++++++++++++");
         position(21,8);
@@ -35,7 +39,7 @@ int main()
         {
            case 1:loginAdmin();
            break;
-           case 2:
+          case 2:loginUser();
            break;
            case 3:exit(0);
            break;

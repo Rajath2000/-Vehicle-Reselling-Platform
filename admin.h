@@ -17,11 +17,7 @@ string  const MONTHS[]={"","JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP"
 //========================All Global variables=========================//
 
 //============================global User defind functions============================//
-string toUpperCase(string str)
-{
-  transform(str.begin(), str.end(),str.begin(),::toupper);
-  return str;
-}
+
 //============================global User defind functions============================//
 
 //==================Contains The Strucre of the Record & memeber functions ============================//
@@ -54,6 +50,10 @@ class VechileRecorder {
             void modifyVechileRecord();
             void viewVechileList();
             void viewOrderList();
+
+            void orderVechile();
+            void searchVechile();
+            void viewCart();
 
 
 };
@@ -102,11 +102,14 @@ void loginAdmin() {
     //============Perform validation with files=================s
     if(loginSucessfull)
     {
+         message="Login Sucessfull";
          runAdmin(admin);
+        
     }
     else
     {
         //Return to Vehicle Reselling platform.c login Failed
+        message="Login Failed";
         return;
     } 
 }
@@ -126,9 +129,9 @@ void runAdmin(Admin admin)
     while(1)
     {
         system("cls");
+        dispayMessage();
         position(8,5);
         _cputs("++++++++++++++++++++ Vehicle Reselling Platform ++++++++++++++++++++");
-
         position(30,6);
         _cputs("+++++++++ Admin +++++++++");
         //dispaying username
@@ -161,7 +164,9 @@ void runAdmin(Admin admin)
            break;
            case 5:vechileRecorder.viewOrderList();
            break;
-           case 6:return;
+           case 6:
+            message="Thank you for Visiting";
+           return;
            break;
            default:
            position(11,14);
