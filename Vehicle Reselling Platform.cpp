@@ -18,15 +18,17 @@ using namespace std;
 
 int row=84;
 int col=10;
+int tablespace=10;
 
 
 //========================All Global variables=========================//
 string const FUEL_TYPE[]={"PETROL","DIESEL"};
 string  const INSURENCE_TYPE[]={"THIRDPARTY","COMPREHENSIVE"};
 int     const WHEELER_TYPE[]={2,3,4};
-string  const WHEELER_TYPE2[]={"MOTERCYCLES"};
-string  const WHEELER_TYPE3[]={"RICKSHAWS"};
-string  const WHEELER_TYPE4[]={"CAR"};
+string const WHEELER_VECHILES[]={"","","MOTERCYCLES","RICKSHAWS","CAR",""};
+// string  const WHEELER_TYPE2[]={"MOTERCYCLES"};
+// string  const WHEELER_TYPE3[]={"RICKSHAWS"};
+// string  const WHEELER_TYPE4[]={"CAR"};
 string  const TRANSMISSION_TYPE[]={"MANUAL","AUTOMATIC"};
 string  const MONTHS[]={"","JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"};
 //========================All Global variables=========================//
@@ -63,6 +65,7 @@ class VechileRecorder {
             void modifyVechileRecord();
             void viewVechileList();
             void viewOrderList();
+          
 
             void orderVechile();
             void searchVechile();
@@ -152,3 +155,4 @@ int main()
     //=====================End of Home Menu================//
     return 0;
 }
+

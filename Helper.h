@@ -7,6 +7,8 @@ using namespace std;
 
 string message;
 
+VechileRecorder searchedVechile;
+
 //===================function to print output in required position================//
 void position(int x,int y)
 {
@@ -31,6 +33,39 @@ string toUpperCase(string str)
 {
   transform(str.begin(), str.end(),str.begin(),::toupper);
   return str;
+}
+
+//=========================Table for Vechile list / single row==========================//
+void dispayVechileTable()
+{
+  if(searchedVechile.vechileNumber.length()>0){
+      VariadicTable<    string,         string,         int,          float,        string,        string,         int,             string,          int,             string,      float,      int,                int,         string> 
+      vt({          "VECHILENUMBER", "CARMODELNAME", "MODELYEAR", "KMS DRIVEN(km)","FUEL TYPE","TRANSMISSION","ENGINEPOWER(CC)","REGISTER MONTH","REGISTER YEAR","INSURENCE TYPE","MILAGE","SEATING CAOACITY","WHEELER TYPE","VECHILE TYPE"}
+      );
+
+        // vt.setColumnFormat({VariadicTableColumnFormat::AUTO,
+        //                 VariadicTableColumnFormat::SCIENTIFIC,
+        //                 VariadicTableColumnFormat::FIXED,
+        //                 VariadicTableColumnFormat::PERCENT});
+
+
+    vt.addRow(searchedVechile.vechileNumber, 
+                                    searchedVechile.carModelName,
+                                                      searchedVechile.modelYear,
+                                                                      searchedVechile.kmsDriven,
+                                                                                    FUEL_TYPE[searchedVechile.fuelType],
+                                                                                                 TRANSMISSION_TYPE[searchedVechile.transmission],
+                                                                                                                searchedVechile.enginePower,
+                                                                                                                                MONTHS[searchedVechile.registerYear.month],
+                                                                                                                                searchedVechile.registerYear.year,
+                                                                                                                                                      INSURENCE_TYPE[searchedVechile.insurenceType],
+                                                                                                                                                            searchedVechile.milage,searchedVechile.seatingCapacity,WHEELER_TYPE[searchedVechile.wheelerType],WHEELER_VECHILES[WHEELER_TYPE[searchedVechile.wheelerType]]        
+    );
+
+    position(2,30);
+   vt.print(std::cout);
+   searchedVechile.vechileNumber="";
+  }
 }
 
 

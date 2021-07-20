@@ -152,7 +152,7 @@ void unpackVechileIndexData(string data)
 {
     string vechilenumber,position;
     int charIndex=0;
-    if(data.length()>0)
+    if(data.length()>0 && data[0]!='*')
     {
         while(data[charIndex]!='|')
         vechilenumber += data[charIndex++];
@@ -248,6 +248,136 @@ bool writeToVechileList(VechileRecorder vechilerecorder,string filename)
 
 }
 
+int searchFromVechileIndex(string key)
+{
+    if(vechileIndexDetails.find(key)==vechileIndexDetails.end())
+    {
+        return -1;
+    }
+    else
+    {
+        return vechileIndexDetails.at(key);
+    }
+}
+
+VechileRecorder UnpackVechileDataFrom(int position=0)
+{
+    VechileRecorder vechilerecorder;
+    int charIndex=0;
+    string data;
+    string temp;
+    ifstream file("Vechilelist.txt");
+    if(file.is_open())
+    {
+         file.seekg(position);
+         getline(file, data);
+
+        //vechile Number
+        while(data[charIndex]!='|')
+            vechilerecorder.vechileNumber += data[charIndex++];
+
+        charIndex++;
+
+        //carModelName
+        while(data[charIndex]!='|')
+            vechilerecorder.carModelName += data[charIndex++];
+
+        charIndex++;
+
+        //modelYear
+        temp.erase();
+        while(data[charIndex]!='|')
+            temp += data[charIndex++];
+        vechilerecorder.modelYear= stoi(temp);
+
+        charIndex++;
+
+        //kmsDriven
+        temp.erase();
+        while(data[charIndex]!='|')
+            temp += data[charIndex++];
+            vechilerecorder.kmsDriven = stof(temp);
+
+        charIndex++;
+
+        //fuelType
+        temp.erase();
+        while(data[charIndex]!='|')
+            temp += data[charIndex++];
+            vechilerecorder.fuelType =stoi(temp);
+
+        charIndex++;
+
+        //transmission
+        temp.erase();
+        while(data[charIndex]!='|')
+            temp += data[charIndex++];
+            vechilerecorder.transmission =stoi(temp);
+
+        charIndex++;
+
+        //enginePower
+        temp.erase();
+        while(data[charIndex]!='|')
+            temp += data[charIndex++];
+            vechilerecorder.enginePower =stoi(temp);
+
+        charIndex++;
+
+        //month
+        temp.erase();
+        while(data[charIndex]!='|')
+            temp += data[charIndex++];
+            vechilerecorder.registerYear.month =stoi(temp);
+
+        charIndex++;
+
+        //year
+        temp.erase();
+        while(data[charIndex]!='|')
+            temp += data[charIndex++];
+            vechilerecorder.registerYear.year = stoi(temp);
+
+        charIndex++;
+
+        //insurenceType
+        temp.erase();
+        while(data[charIndex]!='|')
+            temp += data[charIndex++];
+            vechilerecorder.insurenceType =stoi(temp);
+
+        charIndex++;
+
+        //milage
+        temp.erase();
+        while(data[charIndex]!='|')
+            temp += data[charIndex++];
+            vechilerecorder.milage =stof(temp);
+
+        charIndex++;
+
+        //seatingCapacity
+        temp.erase();
+        while(data[charIndex]!='|')
+            temp += data[charIndex++];
+            vechilerecorder.seatingCapacity =stoi(temp);
+
+        charIndex++;
+
+        //wheelerType
+        temp.erase();
+        while(data[charIndex]!='$')
+            temp += data[charIndex++];
+            vechilerecorder.wheelerType =stoi(temp);
+
+
+
+    }
+    file.close();
+
+    return vechilerecorder;
+       
+}
 
 
 

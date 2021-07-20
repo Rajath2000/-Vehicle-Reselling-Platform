@@ -192,7 +192,7 @@ void runUser(User user){
 ////===========================Vechile Member Functions definitions for user============================================//
 void VechileRecorder::orderVechile(){}
 
-void VechileRecorder::searchVechile(){}
+// void VechileRecorder::searchVechile(){}
 
 void VechileRecorder::viewCart(){}
 ////===========================Vechile Member Functions definitions for user============================================//

@@ -103,8 +103,10 @@ void runAdmin(Admin admin)
         position(row-35+20,col+10);
         _cputs("5.View Order List");
         position(row-35+20,col+11);
-        _cputs("6.Logout (Back to Main Menu)");
+        _cputs("6.Search Vechile");
         position(row-35+20,col+13);
+        _cputs("7.Logout (Back to Main Menu)");
+        position(row-35+20,col+15);
         cout<<"Enter Your Choice:\t";
         getline(cin,choice);
         switch(stoi(choice)) 
@@ -119,12 +121,14 @@ void runAdmin(Admin admin)
            break;
            case 5:vechileRecorder.viewOrderList();
            break;
-           case 6:
+           case 6:vechileRecorder.searchVechile();
+           break;
+           case 7:
             message="Thank you for Visiting";
            return;
            break;
            default:
-           position(row-35+20,col+17);
+           position(row-35+20,col+19);
            _cputs("invalid option");
         }
     
@@ -212,7 +216,7 @@ void VechileRecorder::addVechileRecord(){
             enginePower=stoi(temp);
 
 
-            position(row-35+10,col+10);
+            position(row-35+10,col+20);
             _cputs("Enter Register Month and Year:");
                 registerYear.month=0;
                 registerYear.year=0;
@@ -281,15 +285,76 @@ void VechileRecorder::addVechileRecord(){
         
         }
         
-};
+}
 
-void VechileRecorder::removeVechileRecord(){};
+void VechileRecorder::searchVechile()
+{
+        
+        string choice="N";
+        string temp;
+        int pos;
+        while(1)
+        {
+            system("cls");
+            dispayMessage();
+            dispayVechileTable();
+            position(row-35,col);
+            _cputs("++++++++++++++++++++ Vehicle Reselling Platform ++++++++++++++++++++");
+            position(row-35+20,col+2);
+            _cputs("+++++++++ Search Vechile  +++++++++");
 
-void VechileRecorder::modifyVechileRecord(){};
+            position(row-35+20+1,col+4);
+            _cputs("Back to Main Menu ? (Y or N) : ");
+            getline(cin,choice);
+            if(toUpperCase(choice) == "Y")
+            {
+               return;
+            }
 
-void VechileRecorder::viewVechileList(){};
 
-void VechileRecorder::viewOrderList(){};
+        try{
+            vechileNumber.erase();
+            position(row-35+10,col+6);
+            _cputs("Enter vechileNumber to Search ( ex:KA18A0001):");
+            getline(cin,vechileNumber);
+            vechileNumber=toUpperCase(vechileNumber);
+
+            regex vechileRegex("^[A-Z]{2,2}[0-9]{2,2}[A-Z]+[0-9]{4,4}$");
+
+            if(regex_match(vechileNumber,vechileRegex))
+            {
+                    //Logic to search from filename
+                   pos = searchFromVechileIndex(vechileNumber);
+                   if(pos>=0)
+                   {
+                       searchedVechile = UnpackVechileDataFrom(pos);
+                   }
+                   else
+                   {
+                       message="No Records on "+vechileNumber+" Found in Vechile list";
+                   }
+            }
+            else
+            {
+                message="Invalid Vechile Number";
+            }
+
+        }catch(std::exception)
+        {
+            message="Enter Valid Details";
+        }
+
+
+}
+}
+
+void VechileRecorder::removeVechileRecord(){}
+
+void VechileRecorder::modifyVechileRecord(){}
+
+void VechileRecorder::viewVechileList(){}
+
+void VechileRecorder::viewOrderList(){}
 //===========================End of Vechile Member Functions definitions=====================================//
 
 
