@@ -24,22 +24,22 @@ void signUpUser()
 {
 
     system("cls");
-    position(8,4);
+     position(row-35,col);
     _cputs("++++++++++++++++++++ Vehicle Reselling Platform ++++++++++++++++++++");
-    position(28,6);
+    position(row-35+20,col+2);
     _cputs("+++++++++ Sign Up +++++++++");
 
 
     string username,password,phoneNumber;
     int signupSucessfull=0;//set this to 1 if sign up is loginSucessfull
 
-    position(28,9);
+     position(row-35+20,col+4);
     _cputs("Enter Username:");
     getline(cin,username);
-    position(28,10);
+     position(row-35+20,col+5);
     _cputs("Enter password:");
     getline(cin,password);
-    position(28,11);
+     position(row-35+20,col+6);
     _cputs("Enter phoneNumber:");
     getline(cin,phoneNumber);
     
@@ -75,9 +75,9 @@ void signUpUser()
 void loginUser()
  {
     system("cls");
-    position(8,4);
+    position(row-35,col);
     _cputs("++++++++++++++++++++ Vehicle Reselling Platform ++++++++++++++++++++");
-    position(28,6);
+    position(row-35+20,col+2);
     _cputs("+++++++++ Sign In +++++++++");
 
 
@@ -85,17 +85,17 @@ void loginUser()
     int loginSucessfull=0;//set this to 1 if login is loginSucessfull
     string newUser="N";
 
-    position(20,7);
+    position(row-35+20+1,col+4);
     _cputs("New  USER ? (Y or N) : ");
     getline(cin, newUser);
 
 
     if(newUser=="N")
     {
-        position(28,9);
+        position(row-35+20,col+6);
         _cputs("Enter Username:");
         getline(cin,username);
-        position(28,10);
+        position(row-35+20,col+7);
         _cputs("Enter password:");
         getline(cin,password);
 
@@ -147,23 +147,23 @@ void runUser(User user){
     {
         system("cls");
         dispayMessage();
-        position(8,5);
+        position(row-35,col);
         _cputs("++++++++++++++++++++ Vehicle Reselling Platform ++++++++++++++++++++");
 
-        position(30,6);
+        position(row-35+20,col+2);
         _cputs("+++++++++ User +++++++++");
         //dispaying username
-        position(30,7);
-        _cputs("Hello  ");position(38,7);cout<<mainUser.username;
-        position(21,9);
+        position(row-35+23,col+4);
+        _cputs("Hello  ");position(row-35+23+8,col+4);cout<<mainUser.username;
+        position(row-35+20,col+6);
         _cputs("1.Order");
-        position(21,10);
+        position(row-35+20,col+7);
         _cputs("2.Search");
-        position(21,11);
+        position(row-35+20,col+8);
         _cputs("3.Cart");
-        position(21,12);
+        position(row-35+20,col+9);
         _cputs("4.Logout (Back to Main Menu)");
-         position(21,15);
+         position(row-35+20,col+11);
         cout<<"Enter Your Choice:\t";
         getline(cin,choice);
         switch(stoi(choice))
@@ -179,7 +179,7 @@ void runUser(User user){
            return;
            break;
            default:
-           position(11,14);
+                    position(row-35+20,col+15);
            _cputs("invalid option");
         }
     

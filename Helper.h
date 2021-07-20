@@ -20,7 +20,7 @@ void position(int x,int y)
 void dispayMessage()
 {
     if(message.length()>0){
-    position(8,4);
+    position(row-35+23,col-5);
     cout<<message;
     }
     message="";

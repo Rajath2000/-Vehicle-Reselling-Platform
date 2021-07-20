@@ -5,16 +5,7 @@
 using namespace std;
 
 
-//========================All Global variables=========================//
-string const FUEL_TYPE[]={"PETROL","DIESEL"};
-string  const INSURENCE_TYPE[]={"THIRDPARTY","COMPREHENSIVE"};
-int     const WHEELER_TYPE[]={2,3,4};
-string  const WHEELER_TYPE2[]={"MOTERCYCLES"};
-string  const WHEELER_TYPE3[]={"RICKSHAWS"};
-string  const WHEELER_TYPE4[]={"CAR"};
-string  const TRANSMISSION_TYPE[]={"MANUAL","AUTOMATIC"};
-string  const MONTHS[]={"","JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"};
-//========================All Global variables=========================//
+
 
 //============================global User defind functions=============(This is becase these function will be called before their definition)===============//
 
@@ -23,12 +14,13 @@ string  const MONTHS[]={"","JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP"
 
 
 void runAdmin(Admin);
+bool formValidator(VechileRecorder);
 //=======================Admin login==================//
 void loginAdmin() {
     system("cls");
-    position(8,5);
+    position(row-35,col);
     _cputs("++++++++++++++++++++ Vehicle Reselling Platform ++++++++++++++++++++");
-    position(28,7);
+    position(row-35+20,col+2);
     _cputs("+++++++++ Sign In +++++++++");
 
 
@@ -36,10 +28,10 @@ void loginAdmin() {
     int loginSucessfull=0;//set this to 1 if login is loginSucessfull
 
 
-    position(28,8);
+    position(row-35+20,col+4);
     _cputs("Enter Username:");
     getline(cin,username);
-    position(28,10);
+    position(row-35+20,col+5);
     _cputs("Enter password:");
     getline(cin,password);
 
@@ -86,31 +78,33 @@ void runAdmin(Admin admin)
     Admin mainAdmin(admin.username,admin.password);
     string choice;
 
+    intiAdmin();
+
     //===========================Admin Menu=========================//
     while(1)
     {
         system("cls");
         dispayMessage();
-        position(8,5);
+        position(row-35,col);
         _cputs("++++++++++++++++++++ Vehicle Reselling Platform ++++++++++++++++++++");
-        position(30,6);
+        position(row-35+20,col+2);
         _cputs("+++++++++ Admin +++++++++");
         //dispaying username
-        position(30,7);
-        _cputs("Hello  ");position(38,7);cout<<mainAdmin.username;
-        position(21,9);
+        position(row-35+23,col+4);
+        _cputs("Hello  ");position(row-35+23+8,col+4);cout<<mainAdmin.username;
+        position(row-35+20,col+6);
         _cputs("1.Add Vechile Record");
-        position(21,10);
+        position(row-35+20,col+7);
         _cputs("2.Remove Vechile Record");
-        position(21,11);
+       position(row-35+20,col+8);
         _cputs("3.Modify Vechile Record");
-        position(21,12);
+        position(row-35+20,col+9);
         _cputs("4.View Vechile List");
-        position(21,13);
+        position(row-35+20,col+10);
         _cputs("5.View Order List");
-        position(21,14);
+        position(row-35+20,col+11);
         _cputs("6.Logout (Back to Main Menu)");
-        position(11,17);
+        position(row-35+20,col+13);
         cout<<"Enter Your Choice:\t";
         getline(cin,choice);
         switch(stoi(choice)) 
@@ -130,7 +124,7 @@ void runAdmin(Admin admin)
            return;
            break;
            default:
-           position(11,14);
+           position(row-35+20,col+17);
            _cputs("invalid option");
         }
     
@@ -144,7 +138,150 @@ void runAdmin(Admin admin)
 
 
 //===========================Vechile Member Functions definitions============================================//
-void VechileRecorder::addVechileRecord(){};
+void VechileRecorder::addVechileRecord(){
+        string choice="N";
+        string temp;
+        while(1)
+        {
+            system("cls");
+            dispayMessage();
+            position(row-35,col);
+            _cputs("++++++++++++++++++++ Vehicle Reselling Platform ++++++++++++++++++++");
+            position(row-35+20,col+2);
+            _cputs("+++++++++ Enter Vechile Details  +++++++++");
+
+            position(row-35+20+1,col+4);
+            _cputs("Back to Main Menu ? (Y or N) : ");
+            getline(cin,choice);
+            if(toUpperCase(choice) == "Y")
+            {
+               return;
+            }
+         
+         try{
+            vechileNumber.erase();
+            position(row-35+10,col+6);
+            _cputs("Enter vechileNumber ( ex:KA18A0001):");
+            getline(cin,vechileNumber);
+            vechileNumber=toUpperCase(vechileNumber);
+
+            
+            carModelName.erase();
+            position(row-35+10,col+8);
+            _cputs("Enter Car Model Name (ex: MARUTHI800):");
+            getline(cin,carModelName);
+            carModelName=toUpperCase(carModelName);
+
+            modelYear=0;
+            temp.erase();
+            position(row-35+10,col+10);
+            _cputs("Enter Car Model Year (1800->today):");
+            getline(cin,temp);
+            modelYear=stoi(temp);
+
+
+            kmsDriven=0;
+            temp.erase();
+            position(row-35+10,col+12);
+            _cputs("Enter Kilometer Driven (KM):");
+            getline(cin,temp);
+            kmsDriven=stof(temp);
+
+
+            fuelType=0;
+            temp.erase();
+            position(row-35+10,col+14);
+            _cputs("Enter Fuel Type (0 for PETROL 1 for DIESEL):");
+            getline(cin,temp);
+            fuelType=stoi(temp);
+
+
+            transmission=0;
+            temp.erase();
+            position(row-35+10,col+16);
+            _cputs("Enter Transmission Type (0 for MANUAL 1 for AUTOMATIC):");
+            getline(cin,temp);
+            transmission=stoi(temp);
+
+
+            enginePower=0;
+            temp.erase();
+            position(row-35+10,col+18);
+            _cputs("Enter Engine Power (50CC to 2300CC (CC)):");
+            getline(cin,temp);
+            enginePower=stoi(temp);
+
+
+            position(row-35+10,col+10);
+            _cputs("Enter Register Month and Year:");
+                registerYear.month=0;
+                registerYear.year=0;
+                temp.erase();
+                position(row-35+15,col+21);
+                _cputs("Enter Register Month(1->12):");
+                getline(cin,temp);
+                registerYear.month=stoi(temp);
+
+                position(row-35+15,col+22);
+                _cputs("Enter Register Year:(1800-today)");
+                getline(cin,temp);
+                registerYear.year=stoi(temp);
+
+            
+            insurenceType=0;
+            temp.erase();
+            position(row-35+10,col+24);
+            _cputs("Enter Insurence Type (0 for THIRDPARTY 1 for COMPREHENCIVE):");
+            getline(cin,temp);
+            insurenceType=stoi(temp);
+
+
+            milage=0;
+            temp.erase();
+            position(row-35+10,col+26);
+            _cputs("Enter Milage (km/liters):");
+            getline(cin,temp);
+            milage=stof(temp);
+
+            seatingCapacity=0;
+            temp.erase();
+            position(row-35+10,col+28);
+            _cputs("Enter Seating Capacity (2,4,6,8):");
+            getline(cin,temp);
+            seatingCapacity=stoi(temp);
+
+
+            wheelerType=0;
+            temp.erase();
+            position(row-35+10,col+30);
+            _cputs("Enter Wheeler Type (0 for 2 wheeler , 1 for 3 wheeler,2 for 4 wheeler):");
+            getline(cin,temp);
+            wheelerType=stoi(temp);
+
+
+            //Validate form
+            if(formValidator(*this))
+            {
+                //Logic for file insert
+                if(writeToVechileList(*this,"Vechilelist.txt"))
+                {
+                    message="Record "+ vechileNumber +" Inserted Sucessfully";
+                 
+                }
+                else
+                {
+                    message="Record "+ vechileNumber+" Already Exsists";
+                }
+            }
+
+         }catch(std::exception)
+         {
+             message = "Enter The Valid Details";
+         }
+        
+        }
+        
+};
 
 void VechileRecorder::removeVechileRecord(){};
 
@@ -154,3 +291,76 @@ void VechileRecorder::viewVechileList(){};
 
 void VechileRecorder::viewOrderList(){};
 //===========================End of Vechile Member Functions definitions=====================================//
+
+
+bool formValidator(VechileRecorder Vechilerecorder)
+{
+    regex vechileRegex("^[A-Z]{2,2}[0-9]{2,2}[A-Z]+[0-9]{4,4}$");
+
+    if(!(regex_match(Vechilerecorder.vechileNumber,vechileRegex) ))
+    {
+        message="Invalid Vechile Number";
+        return false;
+    }
+    if( Vechilerecorder.carModelName.length() < 0)
+    {
+        message="Invalid car Model Name";
+        return false;
+    }
+    if( Vechilerecorder.modelYear < 1800 || Vechilerecorder.modelYear > 2021 )
+    {
+        message="Enter Model Year In range";
+        return false;
+    }
+    if( Vechilerecorder.kmsDriven < 0)
+    {
+        message="Enter KMS Driven in Range";
+        return false;
+    }
+    if( !(Vechilerecorder.fuelType  >= 0 && Vechilerecorder.fuelType<=1) )
+    {
+        message="Enter KMS Driven in Range";
+        return false;
+    }
+    if( !(Vechilerecorder.transmission  >= 0 && Vechilerecorder.transmission<=1) )
+    {
+        message="Enter valid trabsmissione";
+        return false;
+    }
+    if( !(Vechilerecorder.enginePower  >= 50 && Vechilerecorder.enginePower<=2300) )
+    {
+        message="Enter Valid Engine Power";
+        return false;
+    }
+    if( !(Vechilerecorder.registerYear.year >= 1800 && Vechilerecorder.registerYear.year<=2021) )
+    {
+        message="Enter Register Year In range";
+        return false;
+    }
+    if( !(Vechilerecorder.registerYear.month >= 1 && Vechilerecorder.registerYear.month <=12) )
+    {
+        message="Enter Register Month In range";
+        return false;
+    }
+    if( !(Vechilerecorder.insurenceType >= 0 && Vechilerecorder.insurenceType <=1) )
+    {
+        message="Enter Valid Insurence Type";
+        return false;
+    }
+    if(Vechilerecorder.milage < 0)
+    {
+        message="Enter Valid Milage Type";
+        return false;
+    }
+    if( !(Vechilerecorder.seatingCapacity >= 2 && Vechilerecorder.seatingCapacity <=8) )
+    {
+        message="Enter Valid seatingCapacity";
+        return false;
+    }
+     if( !(Vechilerecorder.wheelerType >= 0 && Vechilerecorder.wheelerType <=2) )
+    {
+        message="Enter Valid seatingCapacity";
+        return false;
+    }
+    return true;
+}

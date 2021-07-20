@@ -5,16 +5,39 @@
 #include<iostream>
 #include<string>
 #include<unordered_map>
-// #include<bits/stdc++.h>
+#include<regex>
+//#include<bits/stdc++.h>
 
 using namespace std;
 
+
+//=====================================Third Party Modules========================//
+//For printing Table
+#include "include/VariadicTable.h"
+//================================================================================//
+
+int row=84;
+int col=10;
+
+
+//========================All Global variables=========================//
+string const FUEL_TYPE[]={"PETROL","DIESEL"};
+string  const INSURENCE_TYPE[]={"THIRDPARTY","COMPREHENSIVE"};
+int     const WHEELER_TYPE[]={2,3,4};
+string  const WHEELER_TYPE2[]={"MOTERCYCLES"};
+string  const WHEELER_TYPE3[]={"RICKSHAWS"};
+string  const WHEELER_TYPE4[]={"CAR"};
+string  const TRANSMISSION_TYPE[]={"MANUAL","AUTOMATIC"};
+string  const MONTHS[]={"","JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"};
+//========================All Global variables=========================//
 //=================================All Global Classes===================================================//
 //==================Contains The Strucre of the Record & memeber functions ============================//
 
 class monYear{
+    public:
     int month; //1 to 12
     int year; //1800 to today
+    
 };
 
 class VechileRecorder {
@@ -24,11 +47,11 @@ class VechileRecorder {
             string carModelName; //                 ||MARUTHI800
             int modelYear;//                        || 1800-today(2021)
             float kmsDriven; //                     ||kilometres
-            short int fuelType; //                  ||0 for PETROL 1 for DIESEL
+            int fuelType; //                  ||0 for PETROL 1 for DIESEL
             int transmission; //                    ||0 for MANUAL 1 for AUTOMATIC
             int enginePower; //                     ||50CC to 1500CC (CC)
-            monYear registerYear; //
-            short int insurenceType; //             ||0 for THIRDPARTY 1 for COMPREHENCIVE
+             monYear registerYear; //
+             int insurenceType; //             ||0 for THIRDPARTY 1 for COMPREHENCIVE
             float milage; //                        || km/liters
             int seatingCapacity; //                 || 2,4,6,8
             int wheelerType; //                     || 0 for 2 wheeler , 1 for 3 wheeler,2 for 4 wheeler
@@ -91,7 +114,7 @@ class VechileRecorder {
 
 int main()
 {
-   
+    
     string TypeUser;
     //===========================Home Menu=========================//
     while(1)
@@ -99,15 +122,15 @@ int main()
         system("cls");
         dispayMessage();
         message="";
-        position(8,5);
+        position(row-35,col);
         _cputs("++++++++++++++++++++ Vehicle Reselling Platform ++++++++++++++++++++");
-        position(21,8);
+        position(row-35+10,col+3);
         _cputs("1.Admin");
-        position(21,9);
+        position(row-35+10,col+4);
         _cputs("2.User");
-        position(21,10);
+        position(row-35+10,col+5);
         _cputs("3.Exit");
-        position(11,12);
+        position(row-35+10,col+7);
 
         cout<<"Enter Your Choice:\t";
         getline(cin,TypeUser);
@@ -115,13 +138,13 @@ int main()
         {
            case 1:loginAdmin();
            break;
-          case 2:loginUser();
+           case 2:loginUser();
            break;
            case 3:
            exit(0);
            break;
            default:
-           position(11,14);
+           position(row-35+15,col+10);
            _cputs("invalid option");
         }
     

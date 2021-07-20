@@ -4,6 +4,7 @@ using namespace std;
 
 //=====================Which stores in a Hash Table(username,password) pair ========================//
 unordered_map<string, string> adminDetails;
+unordered_map<string, int> vechileIndexDetails;
 // unordered_map<string, User> userDetails;
 
 //====================Unpack for admin object===========================//
@@ -147,11 +148,105 @@ bool writeToUserFile(string filename,string username,string password,string phon
 }
 //==================================================================================//
 
+void unpackVechileIndexData(string data)
+{
+    string vechilenumber,position;
+    int charIndex=0;
+    if(data.length()>0)
+    {
+        while(data[charIndex]!='|')
+        vechilenumber += data[charIndex++];
+
+        charIndex++;
+
+        //password
+        while(data[charIndex]!='$')
+        position += data[charIndex++];
+
+        vechileIndexDetails[vechilenumber]=stoi(position);
+    }
+}
 
 
 
+void intiAdmin()
+{
+    string filename="VechileIndex.txt";
+    string data;
+    create(filename);
+    ifstream file(filename);
+    if(file.is_open())
+    {
+        file.seekg(ios::beg);
+        while(file.good())
+        {
+           getline(file,data);
+           unpackVechileIndexData(data);
+        }
+    }
+
+    file.close();
+
+}
+
+string packVechileIndexData(string vechilenumber,int position)
+{
+    string unionData;
+    unionData=vechilenumber+"|"+to_string(position)+"$";
+    vechileIndexDetails[vechilenumber]=position;
+    return unionData;    
+}
 
 
+void updateVechileIndex(string vechilenumber,int postition)
+{
+    string filename="VechileIndex.txt";
+    create(filename);
+    string data;
+    ofstream file(filename,ios::app);
+    if(file.is_open())
+    {
+        file.seekp(ios::end);
+        data=packVechileIndexData(vechilenumber,postition);
+        file<<data+"\n";
+
+
+    }
+    file.close();
+
+
+}
+
+string packVechileListData(VechileRecorder data,int position)
+{
+    string unionData;
+    unionData=data.vechileNumber+"|"+data.carModelName+"|"+to_string(data.modelYear)+"|"+to_string(data.kmsDriven)+"|"+to_string(data.fuelType)+"|"+to_string(data.transmission)+"|"+to_string(data.enginePower)+"|"+to_string(data.registerYear.month)+"|"+to_string(data.registerYear.year)+"|"+to_string(data.insurenceType)+"|"+to_string(data.milage)+"|"+to_string(data.seatingCapacity)+"|"+to_string(data.wheelerType)+"$"+"\n";
+    
+    updateVechileIndex(data.vechileNumber,position);
+
+    return unionData;
+}
+
+bool writeToVechileList(VechileRecorder vechilerecorder,string filename)
+{
+    create(filename);
+    if(vechileIndexDetails.find(vechilerecorder.vechileNumber)==vechileIndexDetails.end())
+    {
+        string data;
+        ofstream file(filename,ios::ate|ios::app);
+        if(file.is_open())
+        {
+            // file.seekp(ios::end);
+            data=packVechileListData(vechilerecorder,file.tellp());
+            file<<data;
+
+        }
+        file.close();
+        return true;
+    }
+    return false;
+
+}
 
 
 
