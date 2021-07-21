@@ -396,7 +396,7 @@ VechileRecorder UnpackVechileDataFrom(int position)
 
 void deleteRowFromVechileListat(int position,string key)
 {
-    string data;
+    string data,temp;
     string vechileno;
     int indexPos;
     int charIndex=0;
@@ -419,20 +419,27 @@ void deleteRowFromVechileListat(int position,string key)
            getline(file1,data);
            
            if(data.length()>0 && data[0]!='*'){
-
+            
+            vechileno.erase();
             while(data[charIndex]!='|')
             vechileno+= data[charIndex++];
 
             charIndex++;
 
             //password
+            temp.erase();
             while(data[charIndex]!='$')
-            position += data[charIndex++];
+            temp += data[charIndex++];
+            position=stoi(temp);
+
 
 
             if(vechileno == key)
             {
-                file1.seekp(indexPos,ios::beg);
+                indexPos=indexPos-2;
+                if(indexPos<0)
+                    indexPos=0;
+                file1.seekp(indexPos);
                 file1.put('*');
                 break;
             }
@@ -605,7 +612,7 @@ void displayFullVechileTable()
 
     }
 
-    position(1,col+8);
+    position(1,col+10);
     vt.print(std::cout);
     file.close();
     
@@ -618,10 +625,131 @@ void displayFullVechileTable()
 
 
 
+//=====================================User=================================================//
+void unpackOrderData(string data)
+{
+    OrderRecorder orderrecorder;
+    int charIndex=0;
+    if(data.length()>0 && data[0]!='*')
+    {
+
+        while(data[charIndex]!='|')
+        orderrecorder.vechileNumber += data[charIndex++];
+
+        charIndex++;
+
+        
+        while(data[charIndex]!='|')
+        orderrecorder.username += data[charIndex++];
+
+        charIndex++;
 
 
+        while(data[charIndex]!='|')
+        orderrecorder.phoneNumber  += data[charIndex++];
+
+        charIndex++;
+
+        while(data[charIndex]!='$')
+        orderrecorder.myAddress += data[charIndex++];
 
 
+        orderDetails[orderrecorder.vechileNumber]=orderrecorder;
+    }
+}
+
+void initUser()
+{
+    string filename="OrderList.txt";
+    string data;
+    create(filename);
+    ifstream file(filename);
+    if(file.is_open())
+    {
+        file.seekg(ios::beg);
+        while(file.good())
+        {
+           getline(file,data);
+           unpackOrderData(data);
+        }
+    }
+
+    file.close();
+
+}
+
+
+string packOrderData(OrderRecorder data,int position)
+{
+    string unionData;
+    // unionData=data.vechileNumber+"|"+data.carModelName+"|"+to_string(data.modelYear)+"|"+to_string(data.kmsDriven)+"|"+to_string(data.fuelType)+"|"+to_string(data.transmission)+"|"+to_string(data.enginePower)+"|"+to_string(data.registerYear.month)+"|"+to_string(data.registerYear.year)+"|"+to_string(data.insurenceType)+"|"+to_string(data.milage)+"|"+to_string(data.seatingCapacity)+"|"+to_string(data.wheelerType)+"|"+to_string(data.ammount)+"$"+"\n";
+    unionData=data.vechileNumber+"|"+data.username+"|"+data.phoneNumber+"|"+to_string(position)+"$"+"\n";
+    // updateVechileIndex(data.vechileNumber,position);
+    orderDetails[data.vechileNumber]=data;
+    return unionData;
+}
+
+bool writeToOrderList(OrderRecorder orderrecorder)
+{
+    string filename="OrderList.txt";
+    create(filename);
+    if( orderDetails.find(orderrecorder.vechileNumber)==orderDetails.end() )
+    {
+        string data;
+        ofstream file(filename,ios::ate|ios::app);
+        if(file.is_open())
+        {
+            // file.seekp(ios::end);
+            data=packOrderData(orderrecorder,file.tellp());
+            file<<data;
+        }
+        file.close();
+        return true;
+    }
+    return false;
+
+}
+
+void mycart(User user)
+{
+
+    VariadicTable<string,string,string,string,string> 
+        vt({"                                                           ","VECHILENUMBER","USER NAME","CONTACT NUMBER","                                                        "});
+
+
+    unordered_map<string,OrderRecorder>::iterator itr;
+    for(itr=orderDetails.begin();itr != orderDetails.end();itr++)
+    {
+        if( itr->second.username == user.username)
+        {
+            vt.addRow("",itr->second.vechileNumber,itr->second.username,itr->second.phoneNumber,"");
+        }
+    }
+
+    position(1,col+20);
+    vt.print(std::cout);
+
+
+}
+
+void orderLists()
+{
+    
+    VariadicTable<string,string,string,string,string> 
+      vt({"                                                           ","VECHILENUMBER","USER NAME","CONTACT NUMBER","                                                        "});
+
+    unordered_map<string,OrderRecorder>::iterator itr;
+    for(itr=orderDetails.begin();itr != orderDetails.end();itr++)
+    {
+
+            vt.addRow("",itr->second.vechileNumber,itr->second.username,itr->second.phoneNumber,"");
+    
+    }
+
+    position(0,col+20);
+    vt.print(std::cout);
+
+}
 
 
 

@@ -35,6 +35,20 @@ string  const MONTHS[]={"","JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP"
 //=================================All Global Classes===================================================//
 //==================Contains The Strucre of the Record & memeber functions ============================//
 
+//Ueser Class
+ class User{
+    public:
+        string username;
+        string password;
+        string phoneNumber;
+        User(){}
+        User(string userName, string Password,string phonenumber="")
+        {
+            username = userName;
+            password = Password;
+            phoneNumber = phonenumber;
+        }
+ };
 class monYear{
     public:
     int month; //1 to 12
@@ -68,9 +82,9 @@ class VechileRecorder {
             void viewOrderList();
           
 
-            void orderVechile();
+            void orderVechile(User);
             void searchVechile();
-            void viewCart();
+            void viewCart(User);
 
 
 };
@@ -90,21 +104,17 @@ class VechileRecorder {
         //Public Member Functions of Admin
 };
 
-
-//Ueser Class
- class User{
-    public:
+class OrderRecorder{
+        public:
+        string vechileNumber;
         string username;
-        string password;
         string phoneNumber;
-        User(){}
-        User(string userName, string Password,string phonenumber="")
-        {
-            username = userName;
-            password = Password;
-            phoneNumber = phonenumber;
-        }
- };
+        int myAddress;
+        OrderRecorder(){}
+
+};
+
+
 
  //===========================================================================================//
 

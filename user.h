@@ -6,6 +6,7 @@ using namespace std;
 
 //========================All Global variables=========================//
 unordered_map<string, User> userDetails;
+unordered_map<string, OrderRecorder> orderDetails;
 //========================All Global variables=========================//
 
 
@@ -15,6 +16,12 @@ unordered_map<string, User> userDetails;
 void runUser(User);
 bool writeToUserFile(string,string,string,string);
 void readFromUserFile(string,int);
+bool writeToOrderList(OrderRecorder);
+void intiAdmin();
+void initUser();
+void displayFullVechileTable();
+int searchFromVechileIndex(string);
+void mycart(User);
 //============================End of global User defind functions============================//
 
 
@@ -141,7 +148,8 @@ void runUser(User user){
     //Creating the Main User Object Who has some permission to Access
     User mainUser(user.username,user.password,user.phoneNumber);
     string choice;
-
+    intiAdmin();
+    initUser();
     //===========================Admin Menu=========================//
     while(1)
     {
@@ -168,11 +176,11 @@ void runUser(User user){
         getline(cin,choice);
         switch(stoi(choice))
         {
-           case 1:vechileRecorder.orderVechile();
+           case 1:vechileRecorder.orderVechile(mainUser);
            break;
            case 2:vechileRecorder.searchVechile();
            break;
-           case 3:vechileRecorder.viewCart();
+           case 3:vechileRecorder.viewCart(mainUser);
            break;
            case 4:
            message="Thank you for Visiting ";
@@ -190,9 +198,115 @@ void runUser(User user){
 //===========================End of User Menu=========================//
 
 ////===========================Vechile Member Functions definitions for user============================================//
-void VechileRecorder::orderVechile(){}
+void VechileRecorder::orderVechile(User user){
+        string choice="N";
+        string temp;
+        OrderRecorder orderrecorder;
+        while(1)
+        {
+            system("cls");
+            dispayMessage();
+            position(row-35,col);
+            _cputs("++++++++++++++++++++ Vehicle Reselling Platform ++++++++++++++++++++");
+            position(row-35+20,col+2);
+            _cputs("+++++++++ Place Your Order  +++++++++");
+
+            position(row-35+20+1,col+4);
+            _cputs("Back to Main Menu ? (Y or N) : ");
+            getline(cin,choice);
+            if(toUpperCase(choice) == "Y")
+            {
+               return;
+            }
+
+                        
+            try{
+                    vechileNumber.erase();
+                    position(row-35+10,col+6);
+                    displayFullVechileTable();
+                    _cputs("Enter vechileNumber to Order ( ex:KA18A0001):");
+                    getline(cin,vechileNumber);
+                    vechileNumber=toUpperCase(vechileNumber);
+                    regex vechileRegex("^[A-Z]{2,2}[0-9]{2,2}[A-Z]+[0-9]{4,4}$");
+
+                    
+                    
+                     
+                       if(regex_match(vechileNumber,vechileRegex))
+                        {
+                            orderrecorder.vechileNumber=vechileNumber;
+                            orderrecorder.username=user.username;
+                            orderrecorder.phoneNumber=userDetails.at(user.username).phoneNumber;
+                            if(searchFromVechileIndex(vechileNumber)>=0){
+                                if(writeToOrderList(orderrecorder))
+                                {
+                                    message="Your Order On"+ vechileNumber +" Is Sucessfull";
+                                
+                                }
+                                else
+                                {
+                                    message=" This Product  "+ vechileNumber+" Already Ordered By Some One";
+                                }
+                            }
+                            else
+                            {
+                                message=" This Product Not on sale";
+                            }
+                        }
+                        else
+                        {
+                            message="Enter Valid Vechile Number";
+                        }
+                
+                
+                } 
+                catch(const std::exception)
+                {
+                    message="Enter Valid Details";
+                }  
+
+
+        }
+         
+
+}
 
 // void VechileRecorder::searchVechile(){}
 
-void VechileRecorder::viewCart(){}
+void VechileRecorder::viewCart(User user){
+        string choice="N";
+        string temp;
+        while(1)
+        {
+            system("cls");
+            dispayMessage();
+            position(row-35,col);
+            _cputs("++++++++++++++++++++ Vehicle Reselling Platform ++++++++++++++++++++");
+            position(row-35+20,col+2);
+            _cputs("+++++++++ Place Your Order  +++++++++");
+
+
+            // position(10,col+10);
+             mycart(user);
+
+
+
+            position(row-35+20+1,col+4);
+            _cputs("Back to Main Menu ? (Y or N) : ");
+            getline(cin,choice);
+
+            
+
+
+
+            if(toUpperCase(choice) == "Y")
+            {
+               return;
+            }
+
+
+
+        }
+
+}
 ////===========================Vechile Member Functions definitions for user============================================//

@@ -64,7 +64,7 @@ void dispayVechileTable()
                                                                                                                                                             searchedVechile.ammount       
     );
 
-    position(2,30);
+    position(2,1);
    vt.print(std::cout);
    searchedVechile.vechileNumber="";
   }

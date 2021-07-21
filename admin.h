@@ -79,6 +79,7 @@ void runAdmin(Admin admin)
     string choice;
 
     intiAdmin();
+    initUser();
 
     //===========================Admin Menu=========================//
     while(1)
@@ -310,6 +311,8 @@ void VechileRecorder::searchVechile()
             position(row-35+20,col+2);
             _cputs("+++++++++ Search Vechile  +++++++++");
 
+            displayFullVechileTable();
+
             position(row-35+20+1,col+4);
             _cputs("Back to Main Menu ? (Y or N) : ");
             getline(cin,choice);
@@ -375,6 +378,9 @@ void VechileRecorder::removeVechileRecord(){
             position(row-35+20+1,col+4);
             _cputs("Back to Main Menu ? (Y or N) : ");
             getline(cin,choice);
+            displayFullVechileTable();
+
+           
             if(toUpperCase(choice) == "Y")
             {
                return;
@@ -480,7 +486,7 @@ void VechileRecorder::modifyVechileRecord(){
                                system("cls");
                                position(row-35+20,col);
                                _cputs("++++++++++++++Enter What to modify ++++++++++++++");
-                               position(2,col+10);
+                               position(2,col+1);
                                _cputs("1.Car Model Name - 2.Model Year - 3.KiloMeters Driven - 4.Fuel Type - 5.Transmisson - 6.Engine Power - 7.Register (year/month) - 8.Insurence Type - 9.Milage - 10.seatingCapacity - 11.wheelerType - 12.ammount");
                                position(row-35+20,col+2);
                                 cout<<"Enter Your Choice:\t";
@@ -681,7 +687,41 @@ void VechileRecorder::viewVechileList(){
         }
 }
 
-void VechileRecorder::viewOrderList(){}
+void VechileRecorder::viewOrderList(){
+        string choice="N";
+        string temp;
+        while(1)
+        {
+            system("cls");
+            dispayMessage();
+            position(row-35,col);
+            _cputs("++++++++++++++++++++ Vehicle Reselling Platform ++++++++++++++++++++");
+            position(row-35+20,col+2);
+            _cputs("+++++++++ Place Your Order  +++++++++");
+
+
+            // position(10,col+10);
+             orderLists();
+
+
+
+            position(row-35+20+1,col+4);
+            _cputs("Back to Main Menu ? (Y or N) : ");
+            getline(cin,choice);
+
+            
+
+
+
+            if(toUpperCase(choice) == "Y")
+            {
+               return;
+            }
+
+
+
+        }
+}
 //===========================End of Vechile Member Functions definitions=====================================//
 
 
