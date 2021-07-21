@@ -260,7 +260,7 @@ int searchFromVechileIndex(string key)
     }
 }
 
-VechileRecorder UnpackVechileDataFrom(int position=0)
+VechileRecorder UnpackVechileDataFrom(int position)
 {
     VechileRecorder vechilerecorder;
     int charIndex=0;
@@ -396,12 +396,53 @@ VechileRecorder UnpackVechileDataFrom(int position=0)
 
 void deleteRowFromVechileListat(int position,string key)
 {
+    string data;
+    string vechileno;
+    int indexPos;
+    int charIndex=0;
     fstream file("Vechilelist.txt",ios::out|ios::in);
     if(file.is_open())
     {
          file.seekp(position,ios::beg);
          file.put('*');
+         
     }
+    file.close();
+    fstream file1("VechileIndex.txt",ios::out|ios::in);
+    if(file1.is_open())
+    {
+        file1.seekg(ios::beg);
+        while(file1.good())
+        {
+            charIndex=0;
+           indexPos=file1.tellg();
+           getline(file1,data);
+           
+           if(data.length()>0 && data[0]!='*'){
+
+            while(data[charIndex]!='|')
+            vechileno+= data[charIndex++];
+
+            charIndex++;
+
+            //password
+            while(data[charIndex]!='$')
+            position += data[charIndex++];
+
+
+            if(vechileno == key)
+            {
+                file1.seekp(indexPos,ios::beg);
+                file1.put('*');
+                break;
+            }
+           }
+
+        }
+    }
+    file1.close();
+
+
     if(vechileIndexDetails.find(key)==vechileIndexDetails.end())
     {
         

@@ -347,7 +347,7 @@ void VechileRecorder::searchVechile()
             }
             else
             {
-                message="Invalid Vechile Number";
+                message="Invalid Vechile Number" ;
             }
 
         }catch(std::exception)
@@ -417,7 +417,7 @@ void VechileRecorder::removeVechileRecord(){
             }
             else
             {
-                message="Invalid Vechile Number";
+                message="Invalid Vechile Number " + vechileNumber ;
             }
 
         }catch(std::exception)
@@ -429,6 +429,225 @@ void VechileRecorder::removeVechileRecord(){
 }
 
 void VechileRecorder::modifyVechileRecord(){
+        string choice="N",modify="N",modifyChoice;
+        string temp;
+        int pos;
+        while(1)
+        {
+            system("cls");
+            dispayMessage();
+            dispayVechileTable();
+            position(row-35,col);
+            _cputs("++++++++++++++++++++ Vehicle Reselling Platform ++++++++++++++++++++");
+            position(row-35+20,col+2);
+            _cputs("+++++++++ Modify Vechile Record  +++++++++");
+
+            position(row-35+20+1,col+4);
+            _cputs("Back to Main Menu ? (Y or N) : ");
+            getline(cin,choice);
+            if(toUpperCase(choice) == "Y")
+            {
+               return;
+            }
+
+            
+        try{
+            vechileNumber.erase();
+            position(row-35+10,col+6);
+            _cputs("Enter vechileNumber to Mofify ( ex:KA18A0001):");
+            getline(cin,vechileNumber);
+            vechileNumber=toUpperCase(vechileNumber);
+
+            regex vechileRegex("^[A-Z]{2,2}[0-9]{2,2}[A-Z]+[0-9]{4,4}$");
+
+            if(regex_match(vechileNumber,vechileRegex))
+            {
+                    //Logic to search from filename
+                   pos = searchFromVechileIndex(vechileNumber);
+                   if(pos>=0)
+                   {
+                       //need a update
+                       searchedVechile = UnpackVechileDataFrom(pos);
+                       if(searchedVechile.vechileNumber.length()==0){
+                          message="No Records on "+vechileNumber+" Found in Vechile list";
+                       }
+                       else
+                       {
+                          
+                           //Logic To modify
+                           while(1)
+                           {
+                               system("cls");
+                               position(row-35+20,col);
+                               _cputs("++++++++++++++Enter What to modify ++++++++++++++");
+                               position(2,col+10);
+                               _cputs("1.Car Model Name - 2.Model Year - 3.KiloMeters Driven - 4.Fuel Type - 5.Transmisson - 6.Engine Power - 7.Register (year/month) - 8.Insurence Type - 9.Milage - 10.seatingCapacity - 11.wheelerType - 12.ammount");
+                               position(row-35+20,col+2);
+                                cout<<"Enter Your Choice:\t";
+                                getline(cin,modifyChoice);
+
+                                switch(stoi(modifyChoice))
+                                {
+                                    case 1:
+                                    carModelName.erase();
+                                    position(row-35+10,col+6);
+                                    _cputs("Enter Car Model Name (ex: MARUTHI800):");
+                                    getline(cin,carModelName);
+                                    searchedVechile.carModelName=toUpperCase(carModelName);
+                                    break;
+
+                                    case 2:
+                                    modelYear=0;
+                                    temp.erase();
+                                    position(row-35+10,col+6);
+                                    _cputs("Enter Car Model Year (1800->today):");
+                                    getline(cin,temp);
+                                    searchedVechile.modelYear=stoi(temp);
+                                    break;
+
+                                    case 3:
+                                    kmsDriven=0;
+                                    temp.erase();
+                                    position(row-35+10,col+6);
+                                    _cputs("Enter Kilometer Driven (KM):");
+                                    getline(cin,temp);
+                                    searchedVechile.kmsDriven=stof(temp);
+                                    break; 
+
+                                    case 4:
+                                    fuelType=0;
+                                    temp.erase();
+                                    position(row-35+10,col+6);
+                                    _cputs("Enter Fuel Type (0 for PETROL 1 for DIESEL):");
+                                    getline(cin,temp);
+                                   searchedVechile.fuelType=stoi(temp);
+                                    break;
+
+                                    case 5:
+                                    transmission=0;
+                                    temp.erase();
+                                    position(row-35+10,col+6);
+                                    _cputs("Enter Transmission Type (0 for MANUAL 1 for AUTOMATIC):");
+                                    getline(cin,temp);
+                                    searchedVechile.transmission=stoi(temp);
+                                    break;
+
+                                    case 6:     
+                                    enginePower=0;
+                                    temp.erase();
+                                    position(row-35+10,col+6);
+                                    _cputs("Enter Engine Power (50CC to 2300CC (CC)):");
+                                    getline(cin,temp);
+                                    searchedVechile.enginePower=stoi(temp);
+                                    break; 
+
+                                    case 7:
+                                    position(row-35+10,col+6);
+                                    _cputs("Enter Register Month and Year:");
+                                        registerYear.month=0;
+                                        registerYear.year=0;
+                                        temp.erase();
+                                        position(row-35+15,col+8);
+                                        _cputs("Enter Register Month(1->12):");
+                                        getline(cin,temp);
+                                        searchedVechile.registerYear.month=stoi(temp);
+
+                                        position(row-35+15,col+10);
+                                        _cputs("Enter Register Year:(1800-today)");
+                                        getline(cin,temp);
+                                        searchedVechile.registerYear.year=stoi(temp);
+                                    break;
+
+                                    case 8:
+                                    insurenceType=0;
+                                    temp.erase();
+                                    position(row-35+10,col+6);
+                                    _cputs("Enter Insurence Type (0 for THIRDPARTY 1 for COMPREHENCIVE):");
+                                    getline(cin,temp);
+                                    searchedVechile.insurenceType=stoi(temp);
+                                    break;
+
+                                    case 9:
+                                               milage=0;
+                                    temp.erase();
+                                    position(row-35+10,col+6);
+                                    _cputs("Enter Milage (km/liters):");
+                                    getline(cin,temp);
+                                    searchedVechile.milage=stof(temp);
+                                    break; 
+                                    
+                                    case 10:
+                                                seatingCapacity=0;
+                                    temp.erase();
+                                    position(row-35+10,col+6);
+                                    _cputs("Enter Seating Capacity (2,4,6,8):");
+                                    getline(cin,temp);
+                                    searchedVechile.seatingCapacity=stoi(temp);
+                                    break;
+
+                                    case 11:
+                                    wheelerType=0;
+                                    temp.erase();
+                                    position(row-35+10,col+6);
+                                    _cputs("Enter Wheeler Type (0 for 2 wheeler , 1 for 3 wheeler,2 for 4 wheeler):");
+                                    getline(cin,temp);
+                                    searchedVechile.wheelerType=stoi(temp);
+                                    break;
+
+                                    case 12:
+                                    ammount=0;
+                                    temp.erase();
+                                    position(row-35+10,col+6);
+                                    _cputs("Enter Vechile Ammount:");
+                                    getline(cin,temp);
+                                    searchedVechile.ammount=stoi(temp);
+                                    break; 
+
+                                }
+
+                                bool val=formValidator(searchedVechile);
+
+                                position(row-35+20+1,col+12);
+                                _cputs(" Done With Modifying ? (Y or N) : ");
+                                getline(cin,modify);
+                                if(toUpperCase(modify) == "Y")
+                                {
+                                break;
+                                }
+                           }
+
+                                //Validate form
+                                if(formValidator(searchedVechile))
+                                {
+                                    //Logic for file insert
+                                    deleteRowFromVechileListat(pos,searchedVechile.vechileNumber);
+                                    if(writeToVechileList(searchedVechile,"Vechilelist.txt"))
+                                    {
+                                        message="Record "+ vechileNumber +" Modifies Sucessfully Sucessfully";
+                                    
+                                    }
+                                    else
+                                    {
+                                        message="Error in "+ vechileNumber+" Already Exsists";
+                                    }
+                                }
+                       }
+                   }
+                   else
+                   {
+                       message="No Records on "+vechileNumber+" Found in Vechile list";
+                   }
+            }
+            else
+            {
+                message="Invalid Vechile Number1" +vechileNumber;
+            }
+
+        }catch(std::exception)
+        {
+            message="Enter Valid Details";
+        }
+    }
 
 }
 
@@ -444,7 +663,7 @@ bool formValidator(VechileRecorder Vechilerecorder)
 
     if(!(regex_match(Vechilerecorder.vechileNumber,vechileRegex) ))
     {
-        message="Invalid Vechile Number";
+        message="Invalid Vechile Number2" +Vechilerecorder.vechileNumber ;
         return false;
     }
     if( Vechilerecorder.carModelName.length() < 0)
