@@ -272,6 +272,9 @@ VechileRecorder UnpackVechileDataFrom(int position=0)
          file.seekg(position);
          getline(file, data);
 
+    if( data.length()>0 && data[0]!='*' )
+    {
+
         //vechile Number
         while(data[charIndex]!='|')
             vechilerecorder.vechileNumber += data[charIndex++];
@@ -372,11 +375,34 @@ VechileRecorder UnpackVechileDataFrom(int position=0)
 
 
 
-    }
+    
     file.close();
+    }
+    }
+
 
     return vechilerecorder;
+
        
+}
+
+
+void deleteRowFromVechileListat(int position,string key)
+{
+    fstream file("Vechilelist.txt",ios::out|ios::in);
+    if(file.is_open())
+    {
+         file.seekp(position,ios::beg);
+         file.put('*');
+    }
+    if(vechileIndexDetails.find(key)==vechileIndexDetails.end())
+    {
+        
+    }
+    else
+    {
+        vechileIndexDetails.erase(key);
+    }
 }
 
 

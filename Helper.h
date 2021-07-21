@@ -9,6 +9,7 @@ string message;
 
 VechileRecorder searchedVechile;
 
+int searchFromVechileIndex(string);
 //===================function to print output in required position================//
 void position(int x,int y)
 {
@@ -38,7 +39,7 @@ string toUpperCase(string str)
 //=========================Table for Vechile list / single row==========================//
 void dispayVechileTable()
 {
-  if(searchedVechile.vechileNumber.length()>0){
+  if(searchedVechile.vechileNumber.length()>0 && searchFromVechileIndex(searchedVechile.vechileNumber)>=0){
       VariadicTable<    string,         string,         int,          float,        string,        string,         int,             string,          int,             string,      float,      int,                int,         string> 
       vt({          "VECHILENUMBER", "CARMODELNAME", "MODELYEAR", "KMS DRIVEN(km)","FUEL TYPE","TRANSMISSION","ENGINEPOWER(CC)","REGISTER MONTH","REGISTER YEAR","INSURENCE TYPE","MILAGE","SEATING CAOACITY","WHEELER TYPE","VECHILE TYPE"}
       );

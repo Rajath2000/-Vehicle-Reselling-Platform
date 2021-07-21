@@ -327,7 +327,11 @@ void VechileRecorder::searchVechile()
                    pos = searchFromVechileIndex(vechileNumber);
                    if(pos>=0)
                    {
+                       //need a update
                        searchedVechile = UnpackVechileDataFrom(pos);
+                       if(searchedVechile.vechileNumber.length()==0){
+                          message="No Records on "+vechileNumber+" Found in Vechile list";
+                       }
                    }
                    else
                    {
@@ -348,9 +352,78 @@ void VechileRecorder::searchVechile()
 }
 }
 
-void VechileRecorder::removeVechileRecord(){}
+void VechileRecorder::removeVechileRecord(){
+        string choice="N";
+        string temp;
+        int pos;
+        while(1)
+        {
+            system("cls");
+            dispayMessage();
+            position(row-35,col);
+            _cputs("++++++++++++++++++++ Vehicle Reselling Platform ++++++++++++++++++++");
+            position(row-35+20,col+2);
+            _cputs("+++++++++ Remove Vechile  +++++++++");
 
-void VechileRecorder::modifyVechileRecord(){}
+            position(row-35+20+1,col+4);
+            _cputs("Back to Main Menu ? (Y or N) : ");
+            getline(cin,choice);
+            if(toUpperCase(choice) == "Y")
+            {
+               return;
+            }
+
+            
+
+        try{
+            vechileNumber.erase();
+            position(row-35+10,col+6);
+            _cputs("Enter vechileNumber to Remove ( ex:KA18A0001):");
+            getline(cin,vechileNumber);
+            vechileNumber=toUpperCase(vechileNumber);
+
+            regex vechileRegex("^[A-Z]{2,2}[0-9]{2,2}[A-Z]+[0-9]{4,4}$");
+
+            if(regex_match(vechileNumber,vechileRegex))
+            {
+                    //Logic to search from filename
+                   pos = searchFromVechileIndex(vechileNumber);
+                   if(pos>=0)
+                   {
+
+                        //need a update
+                       searchedVechile = UnpackVechileDataFrom(pos);
+                       if(searchedVechile.vechileNumber.length()==0){
+                          message="No Records on "+vechileNumber+" Found in Vechile list";
+                       }
+                       else
+                       {
+                        deleteRowFromVechileListat(pos,vechileNumber);
+                         message="Record "+vechileNumber+" Deleted from Vechile list";
+                       }
+                      
+                   }
+                   else
+                   {
+                       message="No Records on "+vechileNumber+" Found in Vechile list";
+                   }
+            }
+            else
+            {
+                message="Invalid Vechile Number";
+            }
+
+        }catch(std::exception)
+        {
+            message="Enter Valid Details";
+        }
+        }
+
+}
+
+void VechileRecorder::modifyVechileRecord(){
+    
+}
 
 void VechileRecorder::viewVechileList(){}
 
