@@ -40,8 +40,8 @@ string toUpperCase(string str)
 void dispayVechileTable()
 {
   if(searchedVechile.vechileNumber.length()>0 && searchFromVechileIndex(searchedVechile.vechileNumber)>=0){
-      VariadicTable<    string,         string,         int,          float,        string,        string,         int,             string,          int,             string,      float,      int,                int,         string> 
-      vt({          "VECHILENUMBER", "CARMODELNAME", "MODELYEAR", "KMS DRIVEN(km)","FUEL TYPE","TRANSMISSION","ENGINEPOWER(CC)","REGISTER MONTH","REGISTER YEAR","INSURENCE TYPE","MILAGE","SEATING CAOACITY","WHEELER TYPE","VECHILE TYPE"}
+      VariadicTable<    string,         string,         int,          float,        string,        string,         int,             string,          int,             string,      float,      int,                int,         string,          int> 
+      vt({          "VECHILENUMBER", "CARMODELNAME", "MODELYEAR", "KMS DRIVEN(km)","FUEL TYPE","TRANSMISSION","ENGINEPOWER(CC)","REGISTER MONTH","REGISTER YEAR","INSURENCE TYPE","MILAGE","SEATING CAOACITY","WHEELER TYPE","VECHILE TYPE","AMMOUNT ($)"}
       );
 
         // vt.setColumnFormat({VariadicTableColumnFormat::AUTO,
@@ -60,7 +60,8 @@ void dispayVechileTable()
                                                                                                                                 MONTHS[searchedVechile.registerYear.month],
                                                                                                                                 searchedVechile.registerYear.year,
                                                                                                                                                       INSURENCE_TYPE[searchedVechile.insurenceType],
-                                                                                                                                                            searchedVechile.milage,searchedVechile.seatingCapacity,WHEELER_TYPE[searchedVechile.wheelerType],WHEELER_VECHILES[WHEELER_TYPE[searchedVechile.wheelerType]]        
+                                                                                                                                                            searchedVechile.milage,searchedVechile.seatingCapacity,WHEELER_TYPE[searchedVechile.wheelerType],WHEELER_VECHILES[WHEELER_TYPE[searchedVechile.wheelerType]],
+                                                                                                                                                            searchedVechile.ammount       
     );
 
     position(2,30);

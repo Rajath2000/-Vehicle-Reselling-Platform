@@ -220,7 +220,7 @@ void updateVechileIndex(string vechilenumber,int postition)
 string packVechileListData(VechileRecorder data,int position)
 {
     string unionData;
-    unionData=data.vechileNumber+"|"+data.carModelName+"|"+to_string(data.modelYear)+"|"+to_string(data.kmsDriven)+"|"+to_string(data.fuelType)+"|"+to_string(data.transmission)+"|"+to_string(data.enginePower)+"|"+to_string(data.registerYear.month)+"|"+to_string(data.registerYear.year)+"|"+to_string(data.insurenceType)+"|"+to_string(data.milage)+"|"+to_string(data.seatingCapacity)+"|"+to_string(data.wheelerType)+"$"+"\n";
+    unionData=data.vechileNumber+"|"+data.carModelName+"|"+to_string(data.modelYear)+"|"+to_string(data.kmsDriven)+"|"+to_string(data.fuelType)+"|"+to_string(data.transmission)+"|"+to_string(data.enginePower)+"|"+to_string(data.registerYear.month)+"|"+to_string(data.registerYear.year)+"|"+to_string(data.insurenceType)+"|"+to_string(data.milage)+"|"+to_string(data.seatingCapacity)+"|"+to_string(data.wheelerType)+"|"+to_string(data.ammount)+"$"+"\n";
     
     updateVechileIndex(data.vechileNumber,position);
 
@@ -369,9 +369,16 @@ VechileRecorder UnpackVechileDataFrom(int position=0)
 
         //wheelerType
         temp.erase();
-        while(data[charIndex]!='$')
+        while(data[charIndex]!='|')
             temp += data[charIndex++];
             vechilerecorder.wheelerType =stoi(temp);
+
+        charIndex++;
+        //Ammount
+        temp.erase();
+        while(data[charIndex]!='$')
+            temp += data[charIndex++];
+            vechilerecorder.ammount =stoi(temp);
 
 
 

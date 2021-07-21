@@ -262,6 +262,13 @@ void VechileRecorder::addVechileRecord(){
             getline(cin,temp);
             wheelerType=stoi(temp);
 
+            ammount=0;
+            temp.erase();
+            position(row-35+10,col+32);
+            _cputs("Enter Vechile Ammount:");
+            getline(cin,temp);
+            ammount=stoi(temp);
+
 
             //Validate form
             if(formValidator(*this))
@@ -422,7 +429,7 @@ void VechileRecorder::removeVechileRecord(){
 }
 
 void VechileRecorder::modifyVechileRecord(){
-    
+
 }
 
 void VechileRecorder::viewVechileList(){}
@@ -499,6 +506,11 @@ bool formValidator(VechileRecorder Vechilerecorder)
     {
         message="Enter Valid seatingCapacity";
         return false;
+    }
+    if(Vechilerecorder.ammount<=0)
+    {
+        message="Enter Valid Ammount";
+       return false;
     }
     return true;
 }

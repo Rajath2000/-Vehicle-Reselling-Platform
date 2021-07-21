@@ -57,6 +57,7 @@ class VechileRecorder {
             float milage; //                        || km/liters
             int seatingCapacity; //                 || 2,4,6,8
             int wheelerType; //                     || 0 for 2 wheeler , 1 for 3 wheeler,2 for 4 wheeler
+             int ammount;
     //constructors
             VechileRecorder(){};
     //Member Functions
