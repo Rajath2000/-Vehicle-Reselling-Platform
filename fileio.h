@@ -455,7 +455,164 @@ void deleteRowFromVechileListat(int position,string key)
 
 
 
+void displayFullVechileTable()
+{
+    VechileRecorder searchedVechile;
+    string data,temp;
+    int charIndex;
 
+    VariadicTable<    string,         string,         int,          float,        string,        string,         int,             string,          int,             string,      float,      int,                int,         string,          int> 
+      vt({          "VECHILENUMBER", "CARMODELNAME", "MODELYEAR", "KMS DRIVEN(km)","FUEL TYPE","TRANSMISSION","ENGINEPOWER(CC)","REGISTER MONTH","REGISTER YEAR","INSURENCE TYPE","MILAGE","SEATING CAOACITY","WHEELER TYPE","VECHILE TYPE","AMMOUNT ($)"}
+      );
+
+
+
+
+    ifstream file("Vechilelist.txt");
+    if(file.is_open())
+    {
+        while(file.good()){
+         getline(file, data);
+
+    if( data.length()>0 && data[0]!='*' )
+    {
+      
+       searchedVechile.vechileNumber.erase();
+        charIndex=0;
+        //vechile Number
+        while(data[charIndex]!='|')
+            searchedVechile.vechileNumber += data[charIndex++];
+
+        charIndex++;
+
+        //carModelName
+        searchedVechile.carModelName.erase();
+        while(data[charIndex]!='|')
+            searchedVechile.carModelName += data[charIndex++];
+
+        charIndex++;
+
+        //modelYear
+        temp.erase();
+        while(data[charIndex]!='|')
+            temp += data[charIndex++];
+        searchedVechile.modelYear= stoi(temp);
+
+        charIndex++;
+
+        //kmsDriven
+        temp.erase();
+        while(data[charIndex]!='|')
+            temp += data[charIndex++];
+            searchedVechile.kmsDriven = stof(temp);
+
+        charIndex++;
+
+        //fuelType
+        temp.erase();
+        while(data[charIndex]!='|')
+            temp += data[charIndex++];
+            searchedVechile.fuelType =stoi(temp);
+
+        charIndex++;
+
+        //transmission
+        temp.erase();
+        while(data[charIndex]!='|')
+            temp += data[charIndex++];
+            searchedVechile.transmission =stoi(temp);
+
+        charIndex++;
+
+        //enginePower
+        temp.erase();
+        while(data[charIndex]!='|')
+            temp += data[charIndex++];
+            searchedVechile.enginePower =stoi(temp);
+
+        charIndex++;
+
+        //month
+        temp.erase();
+        while(data[charIndex]!='|')
+            temp += data[charIndex++];
+            searchedVechile.registerYear.month =stoi(temp);
+
+        charIndex++;
+
+        //year
+        temp.erase();
+        while(data[charIndex]!='|')
+            temp += data[charIndex++];
+            searchedVechile.registerYear.year = stoi(temp);
+
+        charIndex++;
+
+        //insurenceType
+        temp.erase();
+        while(data[charIndex]!='|')
+            temp += data[charIndex++];
+            searchedVechile.insurenceType =stoi(temp);
+
+        charIndex++;
+
+        //milage
+        temp.erase();
+        while(data[charIndex]!='|')
+            temp += data[charIndex++];
+            searchedVechile.milage =stof(temp);
+
+        charIndex++;
+
+        //seatingCapacity
+        temp.erase();
+        while(data[charIndex]!='|')
+            temp += data[charIndex++];
+            searchedVechile.seatingCapacity =stoi(temp);
+
+        charIndex++;
+
+        //wheelerType
+        temp.erase();
+        while(data[charIndex]!='|')
+            temp += data[charIndex++];
+            searchedVechile.wheelerType =stoi(temp);
+
+        charIndex++;
+        //Ammount
+        temp.erase();
+        while(data[charIndex]!='$')
+            temp += data[charIndex++];
+            searchedVechile.ammount =stoi(temp);
+
+
+        
+    vt.addRow(searchedVechile.vechileNumber, 
+                                    searchedVechile.carModelName,
+                                                      searchedVechile.modelYear,
+                                                                      searchedVechile.kmsDriven,
+                                                                                    FUEL_TYPE[searchedVechile.fuelType],
+                                                                                                 TRANSMISSION_TYPE[searchedVechile.transmission],
+                                                                                                                searchedVechile.enginePower,
+                                                                                                                                MONTHS[searchedVechile.registerYear.month],
+                                                                                                                                searchedVechile.registerYear.year,
+                                                                                                                                                      INSURENCE_TYPE[searchedVechile.insurenceType],
+                                                                                                                                                            searchedVechile.milage,searchedVechile.seatingCapacity,WHEELER_TYPE[searchedVechile.wheelerType],WHEELER_VECHILES[WHEELER_TYPE[searchedVechile.wheelerType]],
+                                                                                                                                                            searchedVechile.ammount       
+    );
+
+    }
+
+    }
+
+    position(1,col+8);
+    vt.print(std::cout);
+    file.close();
+    
+    }
+
+
+}
 
 
 

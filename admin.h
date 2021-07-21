@@ -651,7 +651,35 @@ void VechileRecorder::modifyVechileRecord(){
 
 }
 
-void VechileRecorder::viewVechileList(){}
+void VechileRecorder::viewVechileList(){
+        string choice="N";
+        string temp;
+        int pos;
+        while(1)
+        {
+            system("cls");
+            dispayMessage();
+            position(row-35,col);
+            _cputs("++++++++++++++++++++ Vehicle Reselling Platform ++++++++++++++++++++");
+            position(row-35+20,col+2);
+            _cputs("+++++++++  Vechile List  +++++++++");
+
+
+
+            displayFullVechileTable();
+
+
+            position(row-35+20+1,col+4);
+            _cputs("Back to Main Menu ? (Y or N) : ");
+            getline(cin,choice);
+            if(toUpperCase(choice) == "Y")
+            {
+               return;
+            }
+    
+
+        }
+}
 
 void VechileRecorder::viewOrderList(){}
 //===========================End of Vechile Member Functions definitions=====================================//
