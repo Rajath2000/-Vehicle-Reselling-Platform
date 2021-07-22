@@ -50,7 +50,7 @@ void signUpUser()
     _cputs("Enter phoneNumber:");
     getline(cin,phoneNumber);
     
-    User user((toUpperCase(username)),password,phoneNumber);
+    User user(toUpperCase(username),password,phoneNumber);
     if(username.length()>0 && password.length()>0 && phoneNumber.length()>0 && phoneNumber.length()==10)
     {
         //========================Write to the user.txt file if the user is new ============================//
@@ -263,6 +263,7 @@ void VechileRecorder::orderVechile(User user){
                 catch(const std::exception)
                 {
                     message="Enter Valid Details";
+                    
                 }  
 
 

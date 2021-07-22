@@ -118,7 +118,13 @@ void readFromUserFile(string filename,int pos=ios::beg){
 string packUserData(string username,string password,string phoneNumber)
 {
     string unionData;
+    User user;
     unionData=toUpperCase(username)+"|"+password+"|"+phoneNumber+"$";
+    user.username=toUpperCase(username);
+    user.password=password;
+    user.phoneNumber=phoneNumber;
+        userDetails[username] = user;
+
     return unionData;
      
 }
