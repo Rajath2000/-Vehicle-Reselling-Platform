@@ -43,7 +43,7 @@ void dispayVechileTable()
 {
   if(searchedVechile.vechileNumber.length()>0 && searchFromVechileIndex(searchedVechile.vechileNumber)>=0){
       VariadicTable<    string,         string,         int,          float,        string,        string,         int,             string,          int,             string,      float,      int,                int,         string,          int> 
-      vt({          "VECHILENUMBER", "CARMODELNAME", "MODELYEAR", "KMS DRIVEN(km)","FUEL TYPE","TRANSMISSION","ENGINEPOWER(CC)","REGISTER MONTH","REGISTER YEAR","INSURENCE TYPE","MILAGE","SEATING CAOACITY","WHEELER TYPE","VECHILE TYPE","AMMOUNT ($)"}
+      vt({          "VEHICLE NUMBER", "CARMODELNAME", "MODELYEAR", "KMS DRIVEN(km)","FUEL TYPE","TRANSMISSION","ENGINEPOWER(CC)","REGISTER MONTH","REGISTER YEAR","INSURANCE TYPE","MILAGE","SEATING CAPACITY","WHEELER TYPE","VEHICLE TYPE","AMOUNT ($)"}
       );
 
         // vt.setColumnFormat({VariadicTableColumnFormat::AUTO,
@@ -85,8 +85,8 @@ void welcome_dance()
 		Sleep(30);
 	}
 
-    position(row-20,col);cout<<"SHASHANK S    4SF15IS069";
-	  position(row-20,col+5);cout<<"PRANIL        4SF15IS055";
+    position(row-20,col);cout<<"RAJATH M R    4SF15IS074";
+	  position(row-20,col+5);cout<<"SHAM PRAKASH  4SF18IS";
     Sleep(600);
 
 }

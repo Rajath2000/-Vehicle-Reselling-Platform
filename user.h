@@ -59,13 +59,13 @@ void signUpUser()
         //==================================================================================================//
         if(signupSucessfull)
         {
-            message="Sucessfully Created Account";
+            message="Successfully Created Account";
             //Automatic Login
             runUser(user);
         }
         else
         {
-            message="User Already Exsists";
+            message="User Already Exists";
             return;
         }
     }
@@ -123,7 +123,7 @@ void loginUser()
        //============================================================//
         if(loginSucessfull)
         {
-            message="Login sucessfull";
+            message="Login successful";
             runUser(user);
         }
         else
@@ -240,7 +240,7 @@ void VechileRecorder::orderVechile(User user){
                             if(searchFromVechileIndex(vechileNumber)>=0){
                                 if(writeToOrderList(orderrecorder))
                                 {
-                                    message="Your Order On"+ vechileNumber +" Is Sucessfull";
+                                    message="Your Order On"+ vechileNumber +" Is Successful";
                                 
                                 }
                                 else

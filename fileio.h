@@ -472,7 +472,7 @@ void displayFullVechileTable()
     int charIndex;
 
     VariadicTable<    string,         string,         int,          float,        string,        string,         int,             string,          int,             string,      float,      int,                int,         string,          int> 
-      vt({          "VECHILENUMBER", "CARMODELNAME", "MODELYEAR", "KMS DRIVEN(km)","FUEL TYPE","TRANSMISSION","ENGINEPOWER(CC)","REGISTER MONTH","REGISTER YEAR","INSURENCE TYPE","MILAGE","SEATING CAOACITY","WHEELER TYPE","VECHILE TYPE","AMMOUNT ($)"}
+      vt({          "VEHICLE NUMBER", "CARMODELNAME", "MODELYEAR", "KMS DRIVEN(km)","FUEL TYPE","TRANSMISSION","ENGINEPOWER(CC)","REGISTER MONTH","REGISTER YEAR","INSURANCE TYPE","MILAGE","SEATING CAPACITY","WHEELER TYPE","VEHICLE TYPE","AMOUNT ()"}
       );
 
 
@@ -717,7 +717,7 @@ void mycart(User user)
 {
 
     VariadicTable<string,string,string,string,string> 
-        vt({"                                                           ","VECHILENUMBER","USER NAME","CONTACT NUMBER","                                                        "});
+        vt({"                                                           ","VEHICLE NUMBER","USER NAME","CONTACT NUMBER","                                                        "});
 
 
     unordered_map<string,OrderRecorder>::iterator itr;
@@ -739,7 +739,7 @@ void orderLists()
 {
     
     VariadicTable<string,string,string,string,string> 
-      vt({"                                                           ","VECHILENUMBER","USER NAME","CONTACT NUMBER","                                                        "});
+      vt({"                                                           ","VEHICLE NUMBER","USER NAME","CONTACT NUMBER","                                                        "});
 
     unordered_map<string,OrderRecorder>::iterator itr;
     for(itr=orderDetails.begin();itr != orderDetails.end();itr++)

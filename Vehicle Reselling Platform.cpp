@@ -25,15 +25,15 @@ int tablespace=10;
 string const FUEL_TYPE[]={"PETROL","DIESEL"};
 string  const INSURENCE_TYPE[]={"THIRDPARTY","COMPREHENSIVE"};
 int     const WHEELER_TYPE[]={2,3,4};
-string const WHEELER_VECHILES[]={"","","MOTERCYCLES","RICKSHAWS","CAR",""};
-// string  const WHEELER_TYPE2[]={"MOTERCYCLES"};
+string const WHEELER_VECHILES[]={"","","MOTORCYCLES","RICKSHAWS","CAR",""};
+// string  const WHEELER_TYPE2[]={"MOTORCYCLES"};
 // string  const WHEELER_TYPE3[]={"RICKSHAWS"};
 // string  const WHEELER_TYPE4[]={"CAR"};
 string  const TRANSMISSION_TYPE[]={"MANUAL","AUTOMATIC"};
 string  const MONTHS[]={"","JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"};
 //========================All Global variables=========================//
 //=================================All Global Classes===================================================//
-//==================Contains The Strucre of the Record & memeber functions ============================//
+//==================Contains The Strucure of the Record & member functions ============================//
 
 //Ueser Class
  class User{
@@ -67,7 +67,7 @@ class VechileRecorder {
             int transmission; //                    ||0 for MANUAL 1 for AUTOMATIC
             int enginePower; //                     ||50CC to 1500CC (CC)
              monYear registerYear; //
-             int insurenceType; //             ||0 for THIRDPARTY 1 for COMPREHENCIVE
+             int insurenceType; //             ||0 for THIRDPARTY 1 for COMPREHENSIVE
             float milage; //                        || km/liters
             int seatingCapacity; //                 || 2,4,6,8
             int wheelerType; //                     || 0 for 2 wheeler , 1 for 3 wheeler,2 for 4 wheeler

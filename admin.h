@@ -40,7 +40,7 @@ void loginAdmin() {
         Admin admin((toUpperCase(username)),password);
         //============Perform validation with files=================//
         readFromAdminFile("admin.txt");
-        //Check for User Exsistence
+        //Check for User Existence
         if(adminDetails.find(admin.username)==adminDetails.end())
                  loginSucessfull=0;
         else
@@ -52,7 +52,7 @@ void loginAdmin() {
         //===========================================================//
         if(loginSucessfull)
         {
-            message="Login Sucessfull";
+            message="Login Successful";
             runAdmin(admin);
             
         }
@@ -94,17 +94,17 @@ void runAdmin(Admin admin)
         position(row-35+23,col+4);
         _cputs("Hello  ");position(row-35+23+8,col+4);cout<<mainAdmin.username;
         position(row-35+20,col+6);
-        _cputs("1.Add Vechile Record");
+        _cputs("1.Add Vehicle Record");
         position(row-35+20,col+7);
-        _cputs("2.Remove Vechile Record");
+        _cputs("2.Remove Vehicle Record");
        position(row-35+20,col+8);
-        _cputs("3.Modify Vechile Record");
+        _cputs("3.Modify Vehicle Record");
         position(row-35+20,col+9);
-        _cputs("4.View Vechile List");
+        _cputs("4.View Vehicle List");
         position(row-35+20,col+10);
         _cputs("5.View Order List");
         position(row-35+20,col+11);
-        _cputs("6.Search Vechile");
+        _cputs("6.Search Vehicle");
         position(row-35+20,col+13);
         _cputs("7.Logout (Back to Main Menu)");
         position(row-35+20,col+15);
@@ -236,7 +236,7 @@ void VechileRecorder::addVechileRecord(){
             insurenceType=0;
             temp.erase();
             position(row-35+10,col+24);
-            _cputs("Enter Insurence Type (0 for THIRDPARTY 1 for COMPREHENCIVE):");
+            _cputs("Enter Insurance Type (0 for THIRDPARTY 1 for COMPREHENSIVE ):");
             getline(cin,temp);
             insurenceType=stoi(temp);
 
@@ -266,7 +266,7 @@ void VechileRecorder::addVechileRecord(){
             ammount=0;
             temp.erase();
             position(row-35+10,col+32);
-            _cputs("Enter Vechile Ammount:");
+            _cputs("Enter Vechile Amount:");
             getline(cin,temp);
             ammount=stoi(temp);
 
@@ -277,12 +277,12 @@ void VechileRecorder::addVechileRecord(){
                 //Logic for file insert
                 if(writeToVechileList(*this,"Vechilelist.txt"))
                 {
-                    message="Record "+ vechileNumber +" Inserted Sucessfully";
+                    message="Record "+ vechileNumber +" Inserted Successfully";
                  
                 }
                 else
                 {
-                    message="Record "+ vechileNumber+" Already Exsists";
+                    message="Record "+ vechileNumber+" Already Exists";
                 }
             }
 
@@ -460,7 +460,7 @@ void VechileRecorder::modifyVechileRecord(){
         try{
             vechileNumber.erase();
             position(row-35+10,col+6);
-            _cputs("Enter vechileNumber to Mofify ( ex:KA18A0001):");
+            _cputs("Enter vechileNumber to Modify ( ex:KA18A0001):");
             getline(cin,vechileNumber);
             vechileNumber=toUpperCase(vechileNumber);
 
@@ -487,7 +487,7 @@ void VechileRecorder::modifyVechileRecord(){
                                position(row-35+20,col);
                                _cputs("++++++++++++++Enter What to modify ++++++++++++++");
                                position(2,col+1);
-                               _cputs("1.Car Model Name - 2.Model Year - 3.KiloMeters Driven - 4.Fuel Type - 5.Transmisson - 6.Engine Power - 7.Register (year/month) - 8.Insurence Type - 9.Milage - 10.seatingCapacity - 11.wheelerType - 12.ammount");
+                               _cputs("1.Car Model Name - 2.Model Year - 3.KiloMeters Driven - 4.Fuel Type - 5.Transmission - 6.Engine Power - 7.Register (year/month) - 8.Insurance Type - 9.Milage - 10.seatingCapacity - 11.wheelerType - 12.amount");
                                position(row-35+20,col+2);
                                 cout<<"Enter Your Choice:\t";
                                 getline(cin,modifyChoice);
@@ -568,7 +568,7 @@ void VechileRecorder::modifyVechileRecord(){
                                     insurenceType=0;
                                     temp.erase();
                                     position(row-35+10,col+6);
-                                    _cputs("Enter Insurence Type (0 for THIRDPARTY 1 for COMPREHENCIVE):");
+                                    _cputs("Enter Insurance Type (0 for THIRDPARTY 1 for COMPREHENSIVE):");
                                     getline(cin,temp);
                                     searchedVechile.insurenceType=stoi(temp);
                                     break;
@@ -604,7 +604,7 @@ void VechileRecorder::modifyVechileRecord(){
                                     ammount=0;
                                     temp.erase();
                                     position(row-35+10,col+6);
-                                    _cputs("Enter Vechile Ammount:");
+                                    _cputs("Enter Vechile Amount:");
                                     getline(cin,temp);
                                     searchedVechile.ammount=stoi(temp);
                                     break; 
@@ -629,12 +629,12 @@ void VechileRecorder::modifyVechileRecord(){
                                     deleteRowFromVechileListat(pos,searchedVechile.vechileNumber);
                                     if(writeToVechileList(searchedVechile,"Vechilelist.txt"))
                                     {
-                                        message="Record "+ vechileNumber +" Modifies Sucessfully Sucessfully";
+                                        message="Record "+ vechileNumber +" Modified Successfully ";
                                     
                                     }
                                     else
                                     {
-                                        message="Error in "+ vechileNumber+" Already Exsists";
+                                        message="Error in "+ vechileNumber+" Already Exists";
                                     }
                                 }
                        }
@@ -756,7 +756,7 @@ bool formValidator(VechileRecorder Vechilerecorder)
     }
     if( !(Vechilerecorder.transmission  >= 0 && Vechilerecorder.transmission<=1) )
     {
-        message="Enter valid trabsmissione";
+        message="Enter valid transmissions";
         return false;
     }
     if( !(Vechilerecorder.enginePower  >= 50 && Vechilerecorder.enginePower<=2300) )
@@ -776,7 +776,7 @@ bool formValidator(VechileRecorder Vechilerecorder)
     }
     if( !(Vechilerecorder.insurenceType >= 0 && Vechilerecorder.insurenceType <=1) )
     {
-        message="Enter Valid Insurence Type";
+        message="Enter Valid Insurance Type";
         return false;
     }
     if(Vechilerecorder.milage < 0)
@@ -796,7 +796,7 @@ bool formValidator(VechileRecorder Vechilerecorder)
     }
     if(Vechilerecorder.ammount<=0)
     {
-        message="Enter Valid Ammount";
+        message="Enter Valid Amount";
        return false;
     }
     return true;
