@@ -71,3 +71,20 @@ void dispayVechileTable()
 }
 
 
+void welcome_dance()	
+{
+	system("color FC");
+	int j,i,x,y;
+	for(int j=150;j>=10;j--)
+	{
+  
+		position(j,20);cout<<"#";
+		position(j,4);cout<<"V";
+		Sleep(30);
+	}
+
+    position(row-20,col);cout<<"SHASHANK S    4SF15IS069";
+	  position(row-20,col+5);cout<<"PRANIL        4SF15IS055";
+    Sleep(600);
+
+}

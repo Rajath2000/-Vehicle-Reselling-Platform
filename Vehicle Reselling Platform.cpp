@@ -128,11 +128,14 @@ class OrderRecorder{
 
 int main()
 {
+        system("cls");
+        welcome_dance();
     
     string TypeUser;
     //===========================Home Menu=========================//
     while(1)
     {
+
         system("cls");
         dispayMessage();
         message="";

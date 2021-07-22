@@ -408,7 +408,7 @@ void deleteRowFromVechileListat(int position,string key)
          
     }
     file.close();
-    fstream file1("VechileIndex.txt",ios::out|ios::in);
+    fstream file1("VechileIndex.txt",ios::out|ios::in|ios::binary);
     if(file1.is_open())
     {
         file1.seekg(ios::beg);
@@ -436,9 +436,6 @@ void deleteRowFromVechileListat(int position,string key)
 
             if(vechileno == key)
             {
-                indexPos=indexPos-2;
-                if(indexPos<0)
-                    indexPos=0;
                 file1.seekp(indexPos);
                 file1.put('*');
                 break;
