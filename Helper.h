@@ -84,9 +84,9 @@ void welcome_dance()
 		position(j,4);cout<<"V";
 		Sleep(30);
 	}
-
+Sleep(60);
     position(row-20,col);cout<<"RAJATH M R    4SF15IS074";
-	  position(row-20,col+5);cout<<"SHAM PRAKASH  4SF18IS";
+	  position(row-20,col+5);cout<<"SHAM PRAKASH  4SF18IS087";
     Sleep(600);
 
 }

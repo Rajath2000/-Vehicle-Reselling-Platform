@@ -110,27 +110,34 @@ void runAdmin(Admin admin)
         position(row-35+20,col+15);
         cout<<"Enter Your Choice:\t";
         getline(cin,choice);
-        switch(stoi(choice)) 
-        { 
-           case 1:vechileRecorder.addVechileRecord();
-           break;
-           case 2:vechileRecorder.removeVechileRecord();
-           break;
-           case 3:vechileRecorder.modifyVechileRecord();
-           break;
-           case 4:vechileRecorder.viewVechileList();
-           break;
-           case 5:vechileRecorder.viewOrderList();
-           break;
-           case 6:vechileRecorder.searchVechile();
-           break;
-           case 7:
-            message="Thank you for Visiting";
-           return;
-           break;
-           default:
-           position(row-35+20,col+19);
-           _cputs("invalid option");
+        try{
+            switch(stoi(choice)) 
+            { 
+            case 1:vechileRecorder.addVechileRecord();
+            break;
+            case 2:vechileRecorder.removeVechileRecord();
+            break;
+            case 3:vechileRecorder.modifyVechileRecord();
+            break;
+            case 4:vechileRecorder.viewVechileList();
+            break;
+            case 5:vechileRecorder.viewOrderList();
+            break;
+            case 6:vechileRecorder.searchVechile();
+            break;
+            case 7:
+                message="Thank you for Visiting";
+            return;
+            break;
+            default:
+                        message="Invalid Choice";
+
+
+            }
+        }
+        catch(std::exception)
+        {
+            message="Invalid Choice";
         }
     
     }
@@ -436,6 +443,7 @@ void VechileRecorder::removeVechileRecord(){
 
 void VechileRecorder::modifyVechileRecord(){
         string choice="N",modify="N",modifyChoice;
+        int c;
         string temp;
         int pos;
         while(1)
@@ -491,8 +499,14 @@ void VechileRecorder::modifyVechileRecord(){
                                position(row-35+20,col+2);
                                 cout<<"Enter Your Choice:\t";
                                 getline(cin,modifyChoice);
-
-                                switch(stoi(modifyChoice))
+                                try{
+                                        c=stoi(modifyChoice);
+                                }
+                                catch(std::exception)
+                                {
+                                    message="Invalid Choice";
+                                }
+                                switch(c)
                                 {
                                     case 1:
                                     carModelName.erase();
@@ -609,6 +623,9 @@ void VechileRecorder::modifyVechileRecord(){
                                     searchedVechile.ammount=stoi(temp);
                                     break; 
 
+                                    default:
+                                    message="Invalid Choice";
+                                    dispayMessage();
                                 }
 
                                 bool val=formValidator(searchedVechile);

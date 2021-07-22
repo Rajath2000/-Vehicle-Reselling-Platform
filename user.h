@@ -97,7 +97,7 @@ void loginUser()
     getline(cin, newUser);
 
 
-    if(newUser=="N")
+    if(toUpperCase(newUser)=="N")
     {
         position(row-35+20,col+6);
         _cputs("Enter Username:");
@@ -174,6 +174,7 @@ void runUser(User user){
          position(row-35+20,col+11);
         cout<<"Enter Your Choice:\t";
         getline(cin,choice);
+        try{
         switch(stoi(choice))
         {
            case 1:vechileRecorder.orderVechile(mainUser);
@@ -187,9 +188,16 @@ void runUser(User user){
            return;
            break;
            default:
-                    position(row-35+20,col+15);
-           _cputs("invalid option");
+            message="Invalid Choice";
+    
         }
+
+        }
+        catch(std::exception)
+        {
+            message="Invalid Choice";
+        }
+
     
     }
     //=====================End of Admin Menu================//

@@ -151,19 +151,28 @@ int main()
 
         cout<<"Enter Your Choice:\t";
         getline(cin,TypeUser);
-        switch(stoi(TypeUser))
-        {
-           case 1:loginAdmin();
-           break;
-           case 2:loginUser();
-           break;
-           case 3:
-           exit(0);
-           break;
-           default:
-           position(row-35+15,col+10);
-           _cputs("invalid option");
+        try{
+                switch(stoi(TypeUser))
+                {
+                case 1:loginAdmin();
+                break;
+                case 2:loginUser();
+                break;
+                case 3:
+                exit(0);
+                break;
+                default:
+                           message="Invalid Choice";
+
+                
+                }
         }
+        catch(std::exception)
+        {
+            message="Invalid Choice";
+        }
+
+
     
     }
     //=====================End of Home Menu================//
